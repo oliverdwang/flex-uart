@@ -23,3 +23,28 @@ module bit_synchronizer
   assign data_out = buffer_chain[NUM_STAGES-1];
 
 endmodule: bit_synchronizer
+
+
+module counter
+  #(parameter WIDTH = 8, STEP = 1, RESET_VAL = 0)
+  (
+    input  logic             clk,
+                             rst_n,
+                             load,
+                             en,
+    input  logic [WIDTH-1:0] D,
+    output logic [WIDTH-1:0] Q
+  );
+
+  always_ff @(posedge clk, negedge rst_n) begin
+    if (~rst_n) begin
+      Q <= RESET_VAL;
+    end else begin
+      if (load) begin
+        Q <= D;
+      else begin
+        Q <= Q + STEP;
+    end
+  end
+
+endmodule: counter
