@@ -152,6 +152,7 @@ module bit_detector
   always_ff @(posedge clk) begin
     if (~rst_n) begin
       rx_bit <= 1'b0;
+    end
     else begin
       if (take_sample) begin
         rx_bit <= bitstream_in;
