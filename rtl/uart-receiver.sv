@@ -181,7 +181,7 @@ module bit_detector
   end
 
   // when we detect an edge, resync the timing register
-  assign resync = (rx_bitstream != last_logic_level) ? 1'b1 : 1'b0;
+  assign resync = (bitstream_in != last_logic_level) ? 1'b1 : 1'b0;
 
 
 endmodule: bit_detector
