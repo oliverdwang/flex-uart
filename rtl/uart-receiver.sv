@@ -49,14 +49,14 @@ module bit_detector
 
   logic [3:0] timing_offset;
   logic [2:0] bit_count;
-  logic last_logic_level, resync, take_sample;
+  logic last_logic_level, resync, take_sample, do_edge_count;
 
   counter #(.WIDTH(4),
             .STEP(4'd1),
             .RESET_VAL(4'd0)) timing_cntr(.clk,
                                        .rst_n,
                                        .load(resync),
-                                       .en(cs != IDLE),
+                                       .en(do_edge_count),
                                        .D(4'd0),
                                        .Q(timing_offset));
 
@@ -130,8 +130,9 @@ module bit_detector
     framing_err = 1'b0;
     done = 1'b0;
     take_sample = 1'b0;
+    do_edge_count = 1'b1;
     case(cs)
-      IDLE: // no outputs necessary
+      IDLE: do_edge_count = 1'b0; // don't count time in IDLE
       // take sample at the middle of the cycle
       START_DETECT: take_sample = (timing_offset == 4'd7) ? 1'b1 : 1'b0;
       RX_SAMPLING: begin
