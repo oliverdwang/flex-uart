@@ -4,7 +4,7 @@ module receiver
   (
     input  logic clk,
     input  logic rst_n,
-    input  logic raw_rx_bitstream,
+    input  logic raw_rx_bitstream
   );
 
   // Synchronize rx bitstream to eliminate metastability
@@ -47,6 +47,8 @@ module bit_detector
     output logic done
   );
 
+  logic last_logic_level, resync;
+
   counter #(.WIDTH(4),
             .STEP(4'd1),
             .RESET_VAL(4'd0)) timing_cntr(.clk,
@@ -66,7 +68,6 @@ module bit_detector
                                     .Q(bit_count));
 
 
-  logic last_logic_level, resync;
 
   /***************************************************************************/
   /* Control FSM                                                             */
