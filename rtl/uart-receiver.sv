@@ -166,7 +166,7 @@ module bit_detector
       last_logic_level <= 1'b0;
     end
     else begin
-      last_logic_level <= rx_bitstream;
+      last_logic_level <= bitstream_in;
     end
   end
 
