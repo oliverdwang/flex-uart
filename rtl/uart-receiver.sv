@@ -47,14 +47,16 @@ module bit_detector
     output logic done
   );
 
-  logic last_logic_level, resync;
+  logic [3:0] timing_offset;
+  logic [2:0] bit_count;
+  logic last_logic_level, resync, take_sample;
 
   counter #(.WIDTH(4),
             .STEP(4'd1),
             .RESET_VAL(4'd0)) timing_cntr(.clk,
                                        .rst_n,
                                        .load(resync),
-                                       .en(incr_samp_cnt),
+                                       .en(cs != IDLE),
                                        .D(4'd0),
                                        .Q(timing_offset));
 
