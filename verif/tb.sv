@@ -82,43 +82,15 @@ module top();
   // Test suite
   initial begin
     // Send packets with host interface ready
-    for(int i = 0; i < `NUM_TRIALS; i++) begin
-      reset_context();
-
-      rx_data_ready <= 1'b1;
-      send_packet();
-
-      // Check that data was receieved properly
-      for (unsigned int ack_delay = 0; ack_delay = $urandom_range(16,0); ack_delay++) begin
-        @(posedge clk);
-
-        assert (rx_data_valid)
-          else $error("rx_data_valid not set after property UART packet received");
-        assert (rx_data == packet.data)
-          else $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
-      end
-
-      // Acknowledge receipt of data
-      rx_data_ready <= 1'b0;
-      @(posedge clk);
-
-      assert (!rx_data_valid)
-        else $error("rx_data_valid still set after acknowledgement with !rx_data_ready");
-    end
+    nominal_uart_rx_test();
 
     @(posedge clk);
 
     // Send packets without host interface ready
-    for (int i = 0; i < `NUM_TRIALS; i++) begin
-      reset_context();
-      send_packet();
+    unready_uart_rx_test();
 
-      // Check that rx_data_valid isn't set following transmission
-      for (int j = 0; k < `TIMEOUT_LEN; j++) begin
-        assert (!rx_data_valid)
-          else $error("rx_data_valid set when host is not ready");
-      end
-    end
+    @(posedge clk);
+
 
   end
 
@@ -142,31 +114,116 @@ module top();
     @(posedge clk);
   endtask
 
-  task send_packet;
+  /**
+   * Task to simplify simulating a packet being sent from an external device
+   * to the UART module and receiving it on the host interface 
+   */
+  task tb_send_packet;
     if (!packet.randomize())
-      $display("Error with randomizing UART packet");
+      $warning("Error with randomizing UART packet");
     
     // Send start bit
-    tx_data <= 1'b0;
+    rx_datastream <= 1'b0;
     for (int i = 0; i < packet.startLen; i++) begin
       @(posedge clk);
     end
 
     // Send all data bits
     for (int i = 0; i < `NUM_DATA_BITS; i++) begin
-      tx_data <= packet.data[i];
+      rx_datastream <= packet.data[i];
       for (int j = 0; j < packet.dataLen[i]; j++) begin
         @(posedge clk);
       end
     end
 
     // Send stop bit
-    tx <= 1'b1;
+    rx_datastream <= 1'b1;
     for (int i = 0; i < packet.stopLen; i++) begin
       @(posedge clk);
     end
   endtask
-  
+
+  /**
+   * Task to simplify simulating a packet being sent from the host interface to
+   * an external device through the UART module
+   */
+  task tb_receive_packet;
+    if (!packet.randomize())
+      $warning("Error with randomizing UART packet");
+    
+    // Wait for transmit interface to free up
+    while (!tx_data_ready) begin
+      @(posedge clk);
+    end
+
+    // Simulate host sending data
+    tx_data <= packet.data;
+    tx_data_valid <= 1'b1;
+    
+    for (int i = 0; tx_data_ready; i++) begin
+      assert (i < `TIMEOUT_LEN)
+        else $error("tx_data_ready not unset after tx_data_valid for %i clk edges", `TIMEOUT_LEN);
+      
+      @(posedge clk);
+    end
+
+    // Finish host handshaking session
+    tx_data_valid <= 1'b0;
+
+    @(posedge clk);
+  endtask
+
+  /***************************************************************************/
+  /* WRITTEN TESTS                                                           */
+  /***************************************************************************/
+
+  task nominal_uart_rx_test;
+    for(int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context();
+
+      rx_data_ready <= 1'b1;
+      tb_send_packet();
+
+      // Check that data was receieved properly
+      for (unsigned int ack_delay = 0; ack_delay = $urandom_range(16,0); ack_delay++) begin
+        @(posedge clk);
+
+        assert (rx_data_valid)
+          else $error("rx_data_valid not set after property UART packet received");
+        assert (rx_data == packet.data)
+          else $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
+      end
+
+      // Acknowledge receipt of data
+      rx_data_ready <= 1'b0;
+      @(posedge clk);
+
+      assert (!rx_data_valid)
+        else $error("rx_data_valid still set after acknowledgement with unsetting rx_data_ready");
+    end
+  endtask
+
+  task unready_uart_rx_test;
+    for (int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context();
+      tb_send_packet();
+
+      // Check that rx_data_valid isn't set following transmission
+      for (int j = 0; k < `TIMEOUT_LEN; j++) begin
+        assert (!rx_data_valid)
+          else $error("rx_data_valid set when host is not ready");
+      end
+    end
+  endtask
+
+  task nominal_uart_tx_test;
+    for (int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context;
+      tb_receive_packet();
+
+      
+    end
+  endtask
 
   /***************************************************************************/
   /* PROPERTY ASSERTIONS                                                     */
