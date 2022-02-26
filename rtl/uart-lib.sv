@@ -42,8 +42,10 @@ module counter
     end else begin
       if (load) begin
         Q <= D;
+      end
       else begin
         Q <= Q + STEP;
+      end
     end
   end
 
