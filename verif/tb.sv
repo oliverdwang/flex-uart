@@ -221,7 +221,12 @@ module top();
       reset_context;
       tb_receive_packet();
 
-      
+      // Wait for start bit to appear on tx_datastream
+      while (tx_datastream == 1'b1) begin
+        @(posedge clk);
+      end
+
+
     end
   endtask
 
