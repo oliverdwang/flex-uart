@@ -2,6 +2,7 @@
 
 `define NUM_DATA_BITS 8
 `define MIN_BIT_LEN 14
+`define SPEC_BIT_LEN 16
 `define MAX_BIT_LEN 18
 
 `define NUM_TRIALS 100
@@ -81,17 +82,21 @@ module top();
 
   // Test suite
   initial begin
-    // Send packets with host interface ready
+    // Receive packets with host interface ready
     nominal_uart_rx_test();
 
     @(posedge clk);
 
-    // Send packets without host interface ready
+    // Receive packets without host interface ready
     unready_uart_rx_test();
 
     @(posedge clk);
 
+    // Send packets from the host interface
+    nominal_uart_tx_test();
 
+    // Wrap up test after small delay
+    end_simulation();
   end
 
   /***************************************************************************/
@@ -112,6 +117,14 @@ module top();
 
     rst_n <= 1'b1;
     @(posedge clk);
+  endtask
+
+  task end_simulation;
+    for (int i = 0; i < `TIMEOUT_LEN; i++) begin
+      @(posedge clk);
+    end
+    
+    $finish;
   endtask
 
   /**
@@ -226,7 +239,25 @@ module top();
         @(posedge clk);
       end
 
+      // Check that start bit was transmitted properly
+      for (int j = 0; j < `SPEC_BIT_LEN; j++) begin
+        assert (tx_datastream == 1'b0)
+          else $error("Start bit (%i) was not low", tx_datastream);
+      end
 
+      // Check that all data bits were transmitted properly
+      for (int j = 0; j < `NUM_DATA_BITS; j++) begin
+        for (int k = 0; k < `SPEC_BIT_LEN; k++) begin
+          assert (tx_datastream == packet.data[j])
+            else $error("Data bit (%i) was not transmitted properly", tx_datastream);
+        end
+      end
+
+      // Check that stop bit was transmitted properly
+      for (int j = 0; j < `SPEC_BIT_LEN; j++) begin
+        assert (tx_datastream == 1'b1)
+          else $error("Stop bit (%i) was not transmitted properly", tx_datastream);
+      end
     end
   endtask
 
