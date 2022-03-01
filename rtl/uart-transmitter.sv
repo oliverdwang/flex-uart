@@ -157,6 +157,7 @@ module bit_shifter
   );
 
   logic [3:0] clk_cnt, bits_sent;
+  logic clear_bit_cnt;
 
   // clock divider
   counter #(.WIDTH(4)) xmit_divider(.clk, .rst_n, .load(1'b0), .en(do_tx), .D(4'd0), .Q(clk_cnt));
