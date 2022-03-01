@@ -2,13 +2,19 @@
 
 module receiver
   (
-    input  logic clk,
-    input  logic rst_n,
-    input  logic raw_rx_bitstream
+    input  logic       clk,
+    input  logic       rst_n,
+    input  logic       raw_rx_bitstream,
+    input  logic       host_ready,
+    input  logic       clear_framing_err,
+    output logic [7:0] rx_data,
+    output logic       rx_data_valid,
+    output logic       framing_err,
+    output logic       overrun
   );
 
   // Synchronize rx bitstream to eliminate metastability
-  logic rx_bitstream;
+  logic rx_bitstream, active_rx, bit_ready, rx_bit, done, framing_err_internal;
   bit_synchronizer rx_sync(
     .clk(clk),
     .rst_n(rst_n),
@@ -16,9 +22,158 @@ module receiver
     .data_out(rx_bitstream)
   );
 
+  logic [7:0] shift_in;
+  logic xfer_to_buf, overrun;
+
+  bit_detector rx_core(.clk,
+                       .rst_n,
+                       .bitstream_in(rx_bitstream),
+                       .active_rx,
+                       .bit_ready,
+                       .rx_bit,
+                       .framing_err(framing_err_internal),
+                       .done);
+
+  enum {
+    IDLE_BUF_EMPTY,
+    RX_IN_PROG,
+    IDLE_BUF_FULL,
+    RX_IN_PROG_FULL,
+    FULL,
+    FULL_OVERRUN,
+    UNLOAD_BUF,
+    UNLOAD_BUF_FULL
+  } cs, ns;
+
+  // state register
+  always_ff @(posedge clk) begin
+    if (~rst_n) begin
+      cs <= IDLE_BUF_EMPTY;
+    end
+    else begin
+      cs <= ns;
+    end
+  end
+
+  // next state logic
+  always_comb begin
+    ns = IDLE_BUF_EMPTY;
+    case(cs)
+      IDLE_BUF_EMPTY: ns = (active_rx) ? RX_IN_PROG : IDLE_BUF_EMPTY;
+      RX_IN_PROG: ns = (done) ? IDLE_BUF_FULL : RX_IN_PROG;
+      IDLE_BUF_FULL: begin
+        if (host_ready & ~active_rx) begin
+          ns = IDLE_BUF_EMPTY;
+        end
+        else if (host_ready & active_rx) begin
+          ns = RX_IN_PROG;
+        end
+        else if (~host_ready & active_rx) begin
+          ns = RX_IN_PROG_FULL;
+        end
+        else begin
+          ns = IDLE_BUF_FULL;
+        end
+      end
+      RX_IN_PROG_FULL: begin
+        if (host_ready & ~done) begin
+          ns = RX_IN_PROG;
+        end
+        else if (host_ready & done) begin
+          ns = UNLOAD_BUF;
+        end
+        else if (~host_ready & done) begin
+          ns = FULL;
+        end
+        else begin
+          ns = RX_IN_PROG_FULL;
+        end
+      end
+      FULL: begin
+        if (~host_ready & bit_ready) begin // give more leeway, no overrun until there's a bit we can't take in
+          ns = FULL_OVERRUN;
+        end
+        else if (~host_ready & ~bit_ready) begin
+          ns = FULL;
+        end
+        else if (host_ready & bit_ready) begin
+          ns = UNLOAD_BUF_FULL;
+        end
+        else begin
+          ns = IDLE_BUF_FULL;
+        end
+      end
+      FULL_OVERRUN: begin
+        ns = (host_ready) ? UNLOAD_BUF_FULL : FULL_OVERRUN;
+      end
+      UNLOAD_BUF: begin
+        ns = IDLE_BUF_FULL;
+      end
+      UNLOAD_BUF_FULL: begin
+        // if we're in the middle of a dropped packet, just wait until it's done
+        // before letting host know we're ready to give more data
+        ns = (active_rx) ? UNLOAD_BUF_FULL : IDLE_BUF_FULL;
+      end
+      default: begin
+        ns = IDLE_BUF_EMPTY;
+      end 
+    endcase
+  end
+
+  // output logic
+  always_comb begin
+    xfer_to_buf = 1'b0;
+    rx_data_valid = 1'b0;
+    overrun = 1'b0;
+
+    case(cs)
+      IDLE_BUF_EMPTY: // no outputs here
+      RX_IN_PROG: xfer_to_buf = (ns == IDLE_BUF_FULL) ? 1'b1 : 1'b0;
+      IDLE_BUF_FULL: rx_data_valid = 1'b1;
+      RX_IN_PROG_FULL: rx_data_valid = 1'b1;
+      FULL: begin
+        rx_data_valid = 1'b1;
+        if (host_ready & ~bit_ready) begin
+          xfer_to_buf = 1'b1;
+        end
+      end
+      FULL_OVERRUN: begin
+        overrun = 1'b1;
+        rx_data_valid = 1'b1;
+      end
+      UNLOAD_BUF: xfer_to_buf = 1'b1;
+      UNLOAD_BUF_FULL: xfer_to_buf = (active_rx) ? 1'b0 : 1'b1;
+    endcase
+  end
+
+  // shift & data registers
+  always_ff @(posedge clk) begin
+    if (~rst_n) begin
+      framing_err <= 1'b0;
+      shift_in <= 8'd0;
+      rx_data <= 8'd0;
+    end
+    else begin
+      if (bit_ready) begin
+        shift_in <= {rx_bit, shift_in[7:1]};
+      end
 
 
-  
+      if (xfer_to_buf) begin  
+        rx_data <= {rx_bit, shift_in[7:1]};
+      end
+
+
+      if (framing_err_internal) begin
+        framing_err <= 1'b1;
+      end
+      else if (clear_framing_err) begin
+        framing_err <= 1'b0;
+      end
+
+
+    end
+  end
 
 endmodule: receiver
 
@@ -119,8 +274,9 @@ module bit_detector
         end
       end
       STOP_DETECT: begin
-        ns = (timing_offset == 4'd15) ? IDLE : STOP_DETECT;
+        ns = (timing_offset == 4'd8) ? IDLE : STOP_DETECT;
       end
+      default: ns = IDLE;
     endcase
   end
 
@@ -142,8 +298,8 @@ module bit_detector
       STOP_DETECT: begin
         active_rx = 1'b1;
         take_sample = (timing_offset == 4'd7) ? 1'b1 : 1'b0;
-        done = (timing_offset == 4'd15) ? 1'b1 : 1'b0;
-        framing_err = (~rx_bit && timing_offset == 4'd15) ? 1'b1 : 1'b0;
+        done = (timing_offset == 4'd8) ? 1'b1 : 1'b0;
+        framing_err = (~rx_bit && timing_offset == 4'd8) ? 1'b1 : 1'b0;
       end
     endcase
   end
@@ -174,14 +330,14 @@ module bit_detector
   always_comb begin
     bit_ready = 1'b0;
     if (cs == RX_SAMPLING) begin
-      if (timing_offset == 4'd15) begin
+      if (timing_offset == 4'd8) begin
         bit_ready = 1'b1;
       end
     end
   end
 
   // when we detect an edge, resync the timing register
-  assign resync = (bitstream_in != last_logic_level) ? 1'b1 : 1'b0;
+  assign resync = ((bitstream_in != last_logic_level) && (timing_offset == 4'd1 || timing_offset == 4'd14)) ? 1'b1 : 1'b0;
 
 
 endmodule: bit_detector

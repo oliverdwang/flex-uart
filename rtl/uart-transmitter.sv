@@ -28,7 +28,7 @@ module transmitter
   logic [7:0] latched_tx_data;
   logic [3:0] count;
   logic [9:0] shift_out; // to include start and stop bit
-  logic latch_data, xfer_to_shift, do_tx, do_shift;
+  logic latch_data, xfer_to_shift, do_tx, do_shift, last_bit_tx;
 
   /***************************************************************************/
   /* Control FSM                                                             */
@@ -87,7 +87,6 @@ module transmitter
         end
       end
       STAGE: begin
-        tx_data_ready = 1'b1;
         xfer_to_shift = 1'b1;
       end
       TRANSMIT_BUF_EMPTY: begin
@@ -160,9 +159,9 @@ module bit_shifter
   logic [3:0] clk_cnt, bits_sent;
 
   // clock divider
-  counter #(WIDTH=4) xmit_divider(.clk, .rst_n, .load(1'b0), .en(do_tx), .D(4'd0), .Q(clk_cnt));
+  counter #(.WIDTH(4)) xmit_divider(.clk, .rst_n, .load(1'b0), .en(do_tx), .D(4'd0), .Q(clk_cnt));
   // track how many bits we've sent
-  counter #(WIDTH=4) shifted_counter(.clk, .rst_n, .load(clear_bit_cnt), .en(do_shift), .D(4'd0), .Q(bits_sent));
+  counter #(.WIDTH(4)) shifted_counter(.clk, .rst_n, .load(clear_bit_cnt), .en(do_shift), .D(4'd0), .Q(bits_sent));
   
   always_comb begin
     do_shift = 1'b0;
