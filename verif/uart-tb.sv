@@ -172,18 +172,23 @@ module top();
     // Simulate host sending data
     tx_data <= packet.data;
     tx_data_valid <= 1'b1;
-    
-    for (int i = 0; tx_data_ready; i++) begin
-      assert (i < `TIMEOUT_LEN)
-        else $error("tx_data_ready not unset after tx_data_valid for %i clk edges", `TIMEOUT_LEN);
-      
+    @(posedge clk);
+    while (!tx_data_ready) begin
       @(posedge clk);
     end
-
+    // at this point, tx_data_ready and tx_data_valid should be asserted
+    // transfer is about to occur, deassert valid next cycle
     // Finish host handshaking session
     tx_data_valid <= 1'b0;
-
     @(posedge clk);
+
+    // for (int i = 0; tx_data_ready; i++) begin
+    //   assert (i < `TIMEOUT_LEN)
+    //     else $error("tx_data_ready not unset after tx_data_valid for %i clk edges", `TIMEOUT_LEN);
+      
+    //   @(posedge clk);
+    // end
+
   endtask
 
   /***************************************************************************/
@@ -194,24 +199,25 @@ module top();
     for(int i = 0; i < `NUM_TRIALS; i++) begin
       reset_context();
 
-      rx_data_ready <= 1'b1;
       tb_send_packet();
 
+      assert (rx_data_valid)
+        else $error("rx_data_valid not set after proper UART packet received");
+      assert (rx_data == packet.data)
+        else $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
       // Check that data was receieved properly
-      
-      for (unsigned int ack_delay = 0; ack_delay = $urandom_range(16,0); ack_delay++) begin
+      // let's handshake to the UART that we are ready to latch in data
+      rx_data_ready <= 1'b1;
+      @(posedge clk);
+      while (!rx_data_valid) begin
         @(posedge clk);
-
-        assert (rx_data_valid)
-          else $error("rx_data_valid not set after property UART packet received");
-        assert (rx_data == packet.data)
-          else $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
       end
-
-      // Acknowledge receipt of data
+      // at this point, we know rx_data_read & rx_data_valid
+      // transfer will occur
       rx_data_ready <= 1'b0;
       @(posedge clk);
 
+      // TODO: this is not technically true valid/ready requirement
       assert (!rx_data_valid)
         else $error("rx_data_valid still set after acknowledgement with unsetting rx_data_ready");
     end
