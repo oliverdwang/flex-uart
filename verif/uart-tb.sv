@@ -136,21 +136,21 @@ module top();
       $warning("Error with randomizing UART packet");
     
     // Send start bit
-    rx_datastream <= 1'b0;
+    tb_tx <= 1'b0;
     for (int i = 0; i < packet.startLen; i++) begin
       @(posedge clk);
     end
 
     // Send all data bits
     for (int i = 0; i < `NUM_DATA_BITS; i++) begin
-      rx_datastream <= packet.data[i];
+      tb_tx <= packet.data[i];
       for (int j = 0; j < packet.dataLen[i]; j++) begin
         @(posedge clk);
       end
     end
 
     // Send stop bit
-    rx_datastream <= 1'b1;
+    tb_tx <= 1'b1;
     for (int i = 0; i < packet.stopLen; i++) begin
       @(posedge clk);
     end
@@ -198,6 +198,7 @@ module top();
       tb_send_packet();
 
       // Check that data was receieved properly
+      
       for (unsigned int ack_delay = 0; ack_delay = $urandom_range(16,0); ack_delay++) begin
         @(posedge clk);
 
