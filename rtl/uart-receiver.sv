@@ -145,7 +145,8 @@ module receiver
       end
       UNLOAD_BUF: xfer_to_buf = 1'b1;
       UNLOAD_BUF_FULL: xfer_to_buf = (active_rx) ? 1'b0 : 1'b1;
-      default:
+      default: begin
+      end
     endcase
   end
 
