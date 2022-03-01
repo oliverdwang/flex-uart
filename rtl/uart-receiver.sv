@@ -23,7 +23,7 @@ module receiver
   );
 
   logic [7:0] shift_in;
-  logic xfer_to_buf, overrun;
+  logic xfer_to_buf;
 
   bit_detector rx_core(.clk,
                        .rst_n,
@@ -127,7 +127,9 @@ module receiver
     overrun = 1'b0;
 
     case(cs)
-      IDLE_BUF_EMPTY: // no outputs here
+      IDLE_BUF_EMPTY: begin
+        // no outputs here
+      end
       RX_IN_PROG: xfer_to_buf = (ns == IDLE_BUF_FULL) ? 1'b1 : 1'b0;
       IDLE_BUF_FULL: rx_data_valid = 1'b1;
       RX_IN_PROG_FULL: rx_data_valid = 1'b1;
@@ -143,6 +145,7 @@ module receiver
       end
       UNLOAD_BUF: xfer_to_buf = 1'b1;
       UNLOAD_BUF_FULL: xfer_to_buf = (active_rx) ? 1'b0 : 1'b1;
+      default:
     endcase
   end
 
