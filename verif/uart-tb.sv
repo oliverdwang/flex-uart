@@ -87,11 +87,6 @@ module top();
 
     @(posedge clk);
 
-    // Receive packets without host interface ready
-    unready_uart_rx_test();
-
-    @(posedge clk);
-
     // Send packets from the host interface
     nominal_uart_tx_test();
 
@@ -223,22 +218,9 @@ module top();
     end
   endtask
 
-  task unready_uart_rx_test;
-    for (int i = 0; i < `NUM_TRIALS; i++) begin
-      reset_context();
-      tb_send_packet();
-
-      // Check that rx_data_valid isn't set following transmission
-      for (int j = 0; k < `TIMEOUT_LEN; j++) begin
-        assert (!rx_data_valid)
-          else $error("rx_data_valid set when host is not ready");
-      end
-    end
-  endtask
-
   task nominal_uart_tx_test;
     for (int i = 0; i < `NUM_TRIALS; i++) begin
-      reset_context;
+      reset_context();
       tb_receive_packet();
 
       // Wait for start bit to appear on tx_datastream
