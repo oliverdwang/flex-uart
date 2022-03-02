@@ -15,7 +15,7 @@ module receiver
 
   // Synchronize rx bitstream to eliminate metastability
   logic rx_bitstream, active_rx, bit_ready, rx_bit, done, framing_err_internal;
-  bit_synchronizer rx_sync(
+  bit_synchronizer #(.RESET_VAL(1)) rx_sync(
     .clk(clk),
     .rst_n(rst_n),
     .data_in(raw_rx_bitstream),

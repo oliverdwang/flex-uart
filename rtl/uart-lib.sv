@@ -1,7 +1,7 @@
 `default_nettype none
 
 module bit_synchronizer
-  #(parameter NUM_STAGES = 3)
+  #(parameter NUM_STAGES = 3, RESET_VAL = 0)
   (
     input  logic clk,
     input  logic rst_n,
