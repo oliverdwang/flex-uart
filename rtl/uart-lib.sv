@@ -14,7 +14,7 @@ module bit_synchronizer
 
   always_ff @(posedge clk, negedge rst_n) begin
     if (~rst_n) begin
-      buffer_chain <= 0;
+      buffer_chain <= RESET_VAL;
     end else begin
       buffer_chain <= {buffer_chain[NUM_STAGES-2:0], data_in};
     end

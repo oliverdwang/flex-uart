@@ -15,7 +15,7 @@ module receiver
 
   // Synchronize rx bitstream to eliminate metastability
   logic rx_bitstream, active_rx, bit_ready, rx_bit, done, framing_err_internal;
-  bit_synchronizer #(.RESET_VAL(1)) rx_sync(
+  bit_synchronizer #(.RESET_VAL(3'b111)) rx_sync(
     .clk(clk),
     .rst_n(rst_n),
     .data_in(raw_rx_bitstream),
@@ -268,7 +268,7 @@ module bit_detector
           ns = IDLE;
       end
       RX_SAMPLING: begin
-        if ((bit_count == 3'd7) && (timing_offset == 4'd15)) begin
+        if ((bit_count == 3'd7) && (timing_offset == 4'd8)) begin
           // last sample of last bit collected, prepare to move for stop bit
           ns = STOP_DETECT;
         end

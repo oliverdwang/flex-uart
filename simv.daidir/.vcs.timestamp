@@ -33,13 +33,12 @@ rtl/uart-receiver.sv
 rtl/uart-top.sv
 rtl/uart-transmitter.sv
 verif/uart-tb.sv
-89
+78
 sysc_uni_pwd=/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart
 no_proxy=localhost,127.0.0.1,.cmu.edu,.cmu.local
 https_proxy=http://proximus.ece.cmu.edu:3128/
 http_proxy=http://proximus.ece.cmu.edu:3128/
 ftp_proxy=http://proximus.ece.cmu.edu:3128/
-binpath=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/linux64/bin
 XTERM_VERSION=X.Org 7.6.0(295)
 XTERM_SHELL=/bin/bash
 XTERM_LOCALE=C
@@ -51,7 +50,6 @@ VOLTUS_TEMPUS_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/ssv-19.12.000
 VMR_MODE_FLAG=32
 VCS_VERSION=vcs-mx_vK-2015.09
 VCS_TARGET_ARCH=amd64
-VCS_PATHMAP_PRELOAD_DONE=1
 VCS_MX_HOME_INTERNAL=1
 VCS_MODE_FLAG=64
 VCS_LIC_EXPIRE_WARNING=0
@@ -62,14 +60,12 @@ VCS_ARCH_OVERRIDE=linux
 VCS_ARCH=linux64
 UNAME=/bin/uname
 TOOL_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64
-TCLLIBPATH=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/auxx/tcllib/lib/tcl8.4 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/auxx/tcllib/snps_tcl
 SYNOPSYS_LICENSE=/afs/ece.cmu.edu/support/synopsys/license.dat
 SYNOPSYS_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release
 SSH_CONNECTION=172.31.69.162 53167 172.19.136.192 22
 SSH_CLIENT=172.31.69.162 53167 22
 SSH_AUTH_SOCK=/tmp/FastX-7c7f6eec6a2b5a2343d142ca60bf03a4/agent.134988
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SPECMAN_OUTPUT_TO_TTY=1
 SIM_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/xcelium-19.03.010/tools.lnx86
 SELINUX_USE_CURRENT_RANGE=
 SELINUX_ROLE_REQUESTED=
@@ -90,8 +86,6 @@ MODULESHOME=/usr/share/Modules
 MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
 MMSIM=/usr/cds/mmsim-14.10.527
 MGC_HOME=/afs/ece/support/mgc/mgc.release/cal_2018.2_33.24/aoi_cal_2018.2_33.24
-MDB_SIM_ARGS=-simwarn
-MARCH=linux64
 LOADEDMODULES=
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 LEC_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/confrml-18.10.300/tools.lnx86
@@ -108,14 +102,9 @@ FASTX_SESSION_ID=7c7f6eec6a2b5a2343d142ca60bf03a4
 FASTX_SESSION_DIR=/var/db/fastx3/sessions/davidx/FX3-7c7f6eec6a2b5a2343d142ca60bf03a4
 ECE725_HOME=/afs/ece.cmu.edu/usr/davidx/Private/18725
 ECE725_CLASS=/afs/ece/class/ece725
-DVE_SIM_SELECT_LOOP=on
-DVE_PSTACK=/usr/bin/gstack
-DVE_AUXX_GUI=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/auxx/gui
-DVE=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve
 DC_VERSION=syn-vJ-2014.09-SP4
 DC_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/syn-vJ-2014.09-SP4
 CVS_RSH=ssh
-CMD=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/linux64/bin/dve.exe
 CDS_Netlisting_Mode=Analog
 CDS_LIC_FILE=5280@cadence-lic.ece.cmu.edu
 CDS_AUTO_64BIT=ALL
@@ -127,13 +116,13 @@ AKLOG=/usr/bin/aklog
 6
 1646168766 rtl/uart-transmitter.sv
 1646169426 rtl/uart-top.sv
-1646168317 rtl/uart-receiver.sv
-1646189844 rtl/uart-lib.sv
-1646189396 verif/uart-tb.sv
+1646200835 rtl/uart-receiver.sv
+1646193887 rtl/uart-lib.sv
+1646193184 verif/uart-tb.sv
 1440562444 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/vcsd.tab
 4
 0 
 1440563255 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/libvirsim.so
 1440562843 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/liberrorinf.so
 1440562824 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/libsnpsmalloc.so
-1646189900 simv.daidir
+1646200924 simv.daidir
