@@ -223,29 +223,29 @@ module top();
       reset_context();
       tb_receive_packet();
 
-      // Wait for start bit to appear on tx_datastream
-      while (tx_datastream == 1'b1) begin
+      // Wait for start bit to appear on tb_rx
+      while (tb_rx == 1'b1) begin
         @(posedge clk);
       end
 
       // Check that start bit was transmitted properly
       for (int j = 0; j < `SPEC_BIT_LEN; j++) begin
-        assert (tx_datastream == 1'b0)
-          else $error("Start bit (%i) was not low", tx_datastream);
+        assert (tb_rx == 1'b0)
+          else $error("Start bit (%i) was not low", tb_rx);
       end
 
       // Check that all data bits were transmitted properly
       for (int j = 0; j < `NUM_DATA_BITS; j++) begin
         for (int k = 0; k < `SPEC_BIT_LEN; k++) begin
-          assert (tx_datastream == packet.data[j])
-            else $error("Data bit (%i) was not transmitted properly", tx_datastream);
+          assert (tb_rx == packet.data[j])
+            else $error("Data bit (%i) was not transmitted properly", tb_rx);
         end
       end
 
       // Check that stop bit was transmitted properly
       for (int j = 0; j < `SPEC_BIT_LEN; j++) begin
-        assert (tx_datastream == 1'b1)
-          else $error("Stop bit (%i) was not transmitted properly", tx_datastream);
+        assert (tb_rx == 1'b1)
+          else $error("Stop bit (%i) was not transmitted properly", tb_rx);
       end
     end
   endtask
@@ -259,7 +259,7 @@ module top();
       (!$isunknown(bus));
   endproperty
   
-  assert property(drivenOutput(tx_datastream)) else
+  assert property(drivenOutput(tb_rx)) else
     $warning("tx_datastream is X");
   assert property(drivenOutput(tx_data_ready)) else
     $warning("tx_datastream is X");
