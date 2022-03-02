@@ -1,0 +1,136 @@
+ucliGUI::start /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv -ucligui 
+set ucliGUI::state
+set ucliGUI::state
+ucliCore::getToolPID
+synopsys::env hasTB
+trigger_hier_stack_context_switch 0
+synopsys::xml set_array_limit <data limit="50" />
+synopsys::xml set_depth_limit <data limit="100" />
+synopsys::xml set_string_limit <data limit="1000" />
+synopsys::xml set_only_active_frame <data value="1" />
+synopsys::xml set_variable_frame_id <data value="1" />
+synUtils::setDVEInitPhase 1
+synopsys::dump -type VPD -file /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/inter.vpd -locking
+synopsys::dump -autoflush on -fid VPD4
+set ::dve_fid VPD4
+synUtils::setDVEInitPhase 0
+ucliCore::getToolPID
+synUtils::sendTool -active _icl_setToolSocket /tmp/smlnp8cF6cE
+synUtils::sendTool -active {_icl_start_rpc -version "K-2015.09_Full64" -sync_file /tmp/vcs_dve_rpc.davidx.164513}
+synUtils::sendTool -active {_icl_createSharedMemory /tmp/vcs_dve_general.davidx.164513}
+config endofsim noexit
+config onfail enable all
+config syscaddplainmembers
+config syscaddsourcenames
+config syscaddstructtypes
+synopsys::listing -disable
+# Begin_DVE_Session_Save_Info
+# DVE restart session
+# Saved on Tue Mar 1 21:58:18 2022
+# Designs open: 1
+#   Sim: /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv
+# Toplevel windows open: 3
+# 	TopLevel.1
+# 	TopLevel.2
+# 	TopLevel.3
+#   Source.1: top
+#   Wave.1: 12 signals
+#   Wave.2: 16 signals
+#   Group count = 2
+#   Group Group1 signal count = 12
+#   Group Group2 signal count = 16
+# End_DVE_Session_Save_Info
+# DVE version: K-2015.09_Full64
+# DVE build date: Aug 25 2015 21:36:02
+#<Session mode="Restart" path=".restartSimSession.tcl" type="Debug">
+# Application preferences
+#<WindowLayout>
+# DVE top-level session
+# Create and position top-level window: TopLevel.1
+set TopLevel.1 TopLevel.1
+# Docked window settings
+set HSPane.1 HSPane.1
+set Hier.1 Hier.1
+set Stack.1 Stack.1
+set Class.1 Class.1
+set Object.1 Object.1
+set DLPane.1 DLPane.1
+set Data.1 Data.1
+set Local.1 Local.1
+set Member.1 Member.1
+set Console.1 Console.1
+# MDI window settings
+set Source.1 Source.1
+# End MDI window settings
+# Create and position top-level window: TopLevel.2
+set TopLevel.2 TopLevel.2
+# Docked window settings
+# MDI window settings
+set Wave.1 Wave.1
+# End MDI window settings
+# Create and position top-level window: TopLevel.3
+set TopLevel.3 TopLevel.3
+# Docked window settings
+# MDI window settings
+set Wave.2 Wave.2
+# End MDI window settings
+#</WindowLayout>
+#<Database>
+#</Database>
+# DVE Global setting session:
+# Global: Breakpoints
+# Global: Bus
+# Global: Expressions
+# Global: Signal Time Shift
+# Global: Signal Compare
+# Global: Signal Groups
+synopsys::dump -add {top} -scope "." -depth 1 -fid VPD4
+set _session_group_6 Group1
+set Group1 "$_session_group_6"
+set _session_group_7 Group2
+set Group2 "$_session_group_7"
+# Global: Highlighting
+# Global: Stack
+# Post database loading setting...
+# Save global setting...
+# Wave/List view global setting
+# Close all empty TopLevel windows
+foreach __top [gui_ekki_get_window_ids -type TopLevel] {     if { [llength [gui_ekki_get_window_ids -parent $__top]] == 0} {         gui_close_window -window $__top     } }
+# DVE View/pane content session:
+# Hier 'Hier.1'
+catch {gui_list_expand -id ${Hier.1} top}
+catch {gui_list_expand -id ${Hier.1} top.dut}
+catch {gui_list_expand -id ${Hier.1} top.dut.uart_recv}
+catch {gui_list_select -id ${Hier.1} {top.dut.uart_recv.rx_core}}
+# Class 'Class.1'
+# Member 'Member.1'
+# Data 'Data.1'
+catch { gui_list_select -id ${Data.1} {top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.ns top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.timing_offset top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.last_logic_level }}
+# Source 'Source.1'
+# Warning: Class view not found.
+# View 'Wave.1'
+set groupExD [gui_get_pref_value -category Wave -key exclusiveSG]
+set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
+set origGroupCreationState [gui_list_create_group_when_add -wave]
+ucliGUI::vpdAddHierarchy -scope top.dut.uart_recv.rx_core -depth 1 -file /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/inter.vpd; synopsys::dump -flush VPD4
+synopsys::dump -add {top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.ns } -aggregates  -fid VPD4
+if {$origGroupCreationState} { 	gui_list_create_group_when_add -wave -enable }
+if { $groupExD } {  gui_msg_report -code DVWW028 }
+# View 'Wave.2'
+set groupExD [gui_get_pref_value -category Wave -key exclusiveSG]
+set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
+set origGroupCreationState [gui_list_create_group_when_add -wave]
+synopsys::dump -add {top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.last_logic_level top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.timing_offset } -aggregates  -fid VPD4
+if {$origGroupCreationState} { 	gui_list_create_group_when_add -wave -enable }
+if { $groupExD } {  gui_msg_report -code DVWW028 }
+# Restore toplevel window zorder
+# The toplevel window could be closed if it has no view/pane
+if {[gui_exist_window -window ${TopLevel.2}]} { 	gui_set_active_window -window ${TopLevel.2} 	gui_set_active_window -window ${Wave.1} }
+if {[gui_exist_window -window ${TopLevel.1}]} { 	gui_set_active_window -window ${TopLevel.1} 	gui_set_active_window -window ${Source.1} 	gui_set_active_window -window ${DLPane.1} }
+if {[gui_exist_window -window ${TopLevel.3}]} { 	gui_set_active_window -window ${TopLevel.3} 	gui_set_active_window -window ${Wave.2} }
+#</Session>
+synopsys::run
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state

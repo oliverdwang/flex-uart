@@ -1,0 +1,100 @@
+{
+    "NameTable": {
+        "std": [
+            "std",
+            "reYIK",
+            "module"
+        ],
+        "_vcs_unit__4146107702": [
+            "_vcs_unit__4146107702",
+            "EVcYB",
+            "module"
+        ],
+        "top": [
+            "top",
+            "Emx8S",
+            "module"
+        ],
+        "...MASTER...": [
+            "SIM",
+            "amcQw",
+            "module"
+        ]
+    },
+    "stat": {
+        "ru_self_cgstart": {
+            "ru_nivcsw": 4,
+            "ru_minflt": 14541,
+            "ru_utime_sec": 0.12642500000000001,
+            "ru_nvcsw": 214,
+            "ru_stime_sec": 0.034945999999999998,
+            "ru_maxrss_kb": 60340,
+            "ru_majflt": 14
+        },
+        "ru_childs_cgstart": {
+            "ru_nivcsw": 2,
+            "ru_minflt": 588,
+            "ru_utime_sec": 0.002062,
+            "ru_nvcsw": 3,
+            "ru_stime_sec": 0.002062,
+            "ru_maxrss_kb": 21320,
+            "ru_majflt": 0
+        },
+        "nMops": 7741,
+        "nQuads": 4174,
+        "ru_childs_end": {
+            "ru_nivcsw": 2,
+            "ru_minflt": 588,
+            "ru_utime_sec": 0.002062,
+            "ru_nvcsw": 3,
+            "ru_stime_sec": 0.002062,
+            "ru_maxrss_kb": 21320,
+            "ru_majflt": 0
+        },
+        "mop/quad": 1.8545759463344513,
+        "totalObjSize": 302365,
+        "ru_self_end": {
+            "ru_nivcsw": 5,
+            "ru_minflt": 17948,
+            "ru_utime_sec": 0.182502,
+            "ru_nvcsw": 316,
+            "ru_stime_sec": 0.057473000000000003,
+            "ru_maxrss_kb": 69332,
+            "ru_majflt": 15
+        },
+        "mopSpeed": 138042.33464700327,
+        "quadSpeed": 74433.36840415858,
+        "outputSizePerQuad": 72.0,
+        "Frontend(%)": 69.273213444236234,
+        "CodeGen(%)": 30.726786555763766
+    },
+    "SIMBData": {
+        "out": "amcQwB.o",
+        "bytes": 94470
+    },
+    "CompileStrategy": "fullobj",
+    "CompileProcesses": [
+        "cgproc.139797.json"
+    ],
+    "CurCompileUdps": {},
+    "CurCompileModules": [
+        "...MASTER...",
+        "_vcs_unit__4146107702",
+        "std",
+        "top"
+    ],
+    "LVLData": [
+        "SIM"
+    ],
+    "PEModules": [],
+    "Misc": {
+        "csrc": "csrc",
+        "cwd": "/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart",
+        "csrc_abs": "/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/csrc",
+        "daidir": "simv.daidir",
+        "daidir_abs": "/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv.daidir",
+        "default_output_dir": "csrc",
+        "archive_dir": "archive.0"
+    },
+    "CompileStatus": "Successful"
+}

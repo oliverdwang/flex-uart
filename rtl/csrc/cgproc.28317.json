@@ -1,0 +1,40 @@
+{
+    "Modules": {
+        "uart": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "...MASTER...": {},
+        "std": {}
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "checksum": 4294967295,
+            "out": "objs/amcQw_d.o",
+            "mod": "...MASTER...",
+            "bytes": 8616,
+            "mode": 4
+        },
+        "bvImI_d": {
+            "checksum": 4294967295,
+            "out": "bvImI_d.o",
+            "mod": "uart",
+            "bytes": 34472,
+            "archive": "archive.4/_28317_archive_1.a",
+            "mode": 4
+        }
+    },
+    "reusePaths": {},
+    "ObjArchives": [
+        {
+            "size": 34472,
+            "archive": "archive.4/_28317_archive_1.a",
+            "objects": [
+                [
+                    "bvImI_d.o",
+                    34472
+                ]
+            ]
+        }
+    ]
+}
