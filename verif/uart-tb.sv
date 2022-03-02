@@ -138,8 +138,10 @@ module top();
 
     // Send all data bits
     for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+      $display("packet data is ", packet.data[i]);
       tb_tx <= packet.data[i];
       for (int j = 0; j < packet.dataLen[i]; j++) begin
+	$display("j is ", j);
         @(posedge clk);
       end
     end
