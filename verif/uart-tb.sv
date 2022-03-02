@@ -10,39 +10,17 @@
 
 class uartPkt;
   rand bit [7:0] data;
-  bit [4:0] dataLen [`NUM_DATA_BITS];
+  rand bit [4:0] dataLen [`NUM_DATA_BITS];
 
   rand bit [4:0] startLen;
-  rand bit [4:0] data0Len;
-  rand bit [4:0] data1Len;
-  rand bit [4:0] data2Len;
-  rand bit [4:0] data3Len;
-  rand bit [4:0] data4Len;
-  rand bit [4:0] data5Len;
-  rand bit [4:0] data6Len;
-  rand bit [4:0] data7Len;
   rand bit [4:0] stopLen;
 
   constraint startBit {startLen inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data0Bit {data0Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data1Bit {data1Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data2Bit {data2Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data3Bit {data3Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data4Bit {data4Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data5Bit {data5Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data6Bit {data6Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-  constraint data7Bit {data7Len inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
-
-  function new();
-    dataLen[0] = data0Len;
-    dataLen[1] = data1Len;
-    dataLen[2] = data2Len;
-    dataLen[3] = data3Len;
-    dataLen[4] = data4Len;
-    dataLen[5] = data5Len;
-    dataLen[6] = data6Len;
-    dataLen[7] = data7Len;
-  endfunction: new
+  constraint dataBitLen { foreach (dataLen[i]) {
+      dataLen[i] inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};
+    }
+  }
+  constraint stopBit {startLen inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
 
 endclass: uartPkt
 
