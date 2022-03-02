@@ -186,6 +186,16 @@ module top();
 
   endtask
 
+  /**
+    * Task to wait for the inputs to propagate through the bit synchronizer
+    * takes 3 cycles
+    */
+  task wait_for_bit_synchronizer;
+    @(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
+  endtask
+
   /***************************************************************************/
   /* WRITTEN TESTS                                                           */
   /***************************************************************************/
@@ -195,6 +205,7 @@ module top();
       reset_context();
 
       tb_send_packet();
+      wait_for_bit_synchronizer();
 
       assert (rx_data_valid)
         else $error("rx_data_valid not set after proper UART packet received");
