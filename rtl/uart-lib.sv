@@ -43,7 +43,7 @@ module counter
       if (load) begin
         Q <= D;
       end
-      else begin
+      else if (en) begin
         Q <= Q + STEP;
       end
     end

@@ -71,9 +71,9 @@ module top();
            .rx_data_ready,
            .rx_data);
 
-  
+
   uartPkt packet = new;
-  
+
   // Clock generator
   initial begin
     clk = 0;
@@ -118,18 +118,18 @@ module top();
     for (int i = 0; i < `TIMEOUT_LEN; i++) begin
       @(posedge clk);
     end
-    
+
     $finish;
   endtask
 
   /**
    * Task to simplify simulating a packet being sent from an external device
-   * to the UART module and receiving it on the host interface 
+   * to the UART module and receiving it on the host interface
    */
   task tb_send_packet;
     if (!packet.randomize())
       $warning("Error with randomizing UART packet");
-    
+
     // Send start bit
     tb_tx <= 1'b0;
     for (int i = 0; i < packet.startLen; i++) begin
@@ -158,7 +158,7 @@ module top();
   task tb_receive_packet;
     if (!packet.randomize())
       $warning("Error with randomizing UART packet");
-    
+
     // Wait for transmit interface to free up
     while (!tx_data_ready) begin
       @(posedge clk);
@@ -180,7 +180,7 @@ module top();
     // for (int i = 0; tx_data_ready; i++) begin
     //   assert (i < `TIMEOUT_LEN)
     //     else $error("tx_data_ready not unset after tx_data_valid for %i clk edges", `TIMEOUT_LEN);
-      
+
     //   @(posedge clk);
     // end
 
@@ -255,10 +255,10 @@ module top();
   /***************************************************************************/
 
   property drivenOutput (bus);
-    @(posedge clock) disable iff (!rst_n)
+    @(posedge clk) disable iff (!rst_n)
       (!$isunknown(bus));
   endproperty
-  
+
   assert property(drivenOutput(tb_rx)) else
     $warning("tx_datastream is X");
   assert property(drivenOutput(tx_data_ready)) else

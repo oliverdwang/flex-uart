@@ -1,0 +1,5 @@
+/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/rtl/uart-lib.sv
+/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/rtl/uart-receiver.sv
+/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/rtl/uart-top.sv
+/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/rtl/uart-transmitter.sv
+/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/verif/uart-tb.sv
