@@ -164,7 +164,7 @@ module receiver
 
 
       if (xfer_to_buf) begin  
-        rx_data <= {rx_bit, shift_in[7:1]};
+        rx_data <= shift_in;
       end
 
 
@@ -208,7 +208,7 @@ module bit_detector
 
   logic [3:0] timing_offset;
   logic [2:0] bit_count;
-  logic last_logic_level, resync, take_sample, do_edge_count;
+  logic last_logic_level, resync, take_sample, do_edge_count, did_sample;
 
   counter #(.WIDTH(4),
             .STEP(4'd1),
@@ -255,17 +255,17 @@ module bit_detector
       // wait for a possible start bit
       IDLE: ns = (~bitstream_in) ? START_DETECT : IDLE;
       START_DETECT: begin
-        if (timing_offset != 4'd15) begin
-          // gotta sample enough times first to see
-          ns = START_DETECT;
-        end
-        else if (~rx_bit) begin
+        if ((timing_offset == 4'd15 || resync) && ~rx_bit && did_sample) begin
           // the voltage was low when it was sampled, it's a valid start bit
           ns = RX_SAMPLING;
         end
-        else
-          // the voltage was high when it was sampled, go back to idle
+        else if ((timing_offset == 4'd15 || resync) && rx_bit && did_sample) begin
+        	// the voltage was high when it was sampled, go back to idle
           ns = IDLE;
+        end
+        else begin
+          ns = START_DETECT;
+        end
       end
       RX_SAMPLING: begin
         if ((bit_count == 3'd7) && (timing_offset == 4'd8)) begin
@@ -327,6 +327,19 @@ module bit_detector
     end
     else begin
       last_logic_level <= bitstream_in;
+    end
+  end
+
+  // see if we've already taken a sample
+  always_ff @(posedge clk) begin
+    if (~rst_n) begin
+    	did_sample <= 1'b0;
+    end
+    else if (take_sample) begin
+    	did_sample <= 1'b1;
+    end
+    else if (timing_offset == 4'd0) begin
+    	did_sample <= 1'b0;
     end
   end
 
