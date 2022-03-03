@@ -1,37 +1,43 @@
 {
     "MlibObjs": {},
-    "LVLData": [
-        "SIM"
+    "CompileStrategy": "fullobj",
+    "CompileProcesses": [
+        "cgproc.125028.json"
+    ],
+    "CurCompileUdps": {},
+    "CurCompileModules": [
+        "...MASTER...",
+        "top"
     ],
     "PrevCompiledModules": {
-        "_vcs_unit__4146107702": {
-            "EVcYB_d": {
-                "bytes": 12881,
-                "archive": "archive.30/_prev_archive_1.a",
-                "mod": "_vcs_unit__4146107702",
-                "out": "EVcYB_d.o",
+        "top": {
+            "Emx8S_d": {
+                "bytes": 158217,
+                "archive": "archive.39/_125028_archive_1.a",
+                "mod": "top",
+                "mode": 4,
                 "checksum": 4294967295,
-                "mode": 4
+                "out": "Emx8S_d.o"
             }
         },
         "std": {
             "reYIK_d": {
                 "bytes": 33471,
-                "archive": "archive.30/_prev_archive_1.a",
+                "archive": "archive.39/_prev_archive_1.a",
                 "mod": "std",
-                "checksum": 4294967295,
                 "mode": 4,
+                "checksum": 4294967295,
                 "out": "reYIK_d.o"
             }
         },
-        "top": {
-            "Emx8S_d": {
-                "bytes": 156861,
-                "archive": "archive.30/_20028_archive_1.a",
-                "mod": "top",
-                "checksum": 4294967295,
+        "_vcs_unit__4146107702": {
+            "EVcYB_d": {
+                "bytes": 12881,
+                "archive": "archive.39/_prev_archive_1.a",
+                "mod": "_vcs_unit__4146107702",
                 "mode": 4,
-                "out": "Emx8S_d.o"
+                "checksum": 4294967295,
+                "out": "EVcYB_d.o"
             }
         },
         "...MASTER...": {
@@ -39,15 +45,15 @@
                 "bytes": 7613,
                 "mod": "...MASTER...",
                 "out": "objs/amcQw_d.o",
-                "checksum": 4294967295,
-                "mode": 4
+                "mode": 4,
+                "checksum": 4294967295
             }
         }
     },
     "NameTable": {
-        "_vcs_unit__4146107702": [
-            "_vcs_unit__4146107702",
-            "EVcYB",
+        "top": [
+            "top",
+            "Emx8S",
             "module"
         ],
         "std": [
@@ -55,9 +61,9 @@
             "reYIK",
             "module"
         ],
-        "top": [
-            "top",
-            "Emx8S",
+        "_vcs_unit__4146107702": [
+            "_vcs_unit__4146107702",
+            "EVcYB",
             "module"
         ],
         "...MASTER...": [
@@ -66,75 +72,69 @@
             "module"
         ]
     },
+    "SIMBData": {
+        "out": "amcQwB.o",
+        "bytes": 96026
+    },
     "stat": {
-        "ru_childs_end": {
-            "ru_utime_sec": 0.0,
-            "ru_nvcsw": 0,
-            "ru_maxrss_kb": 0,
-            "ru_stime_sec": 0.0,
-            "ru_nivcsw": 0,
-            "ru_minflt": 0,
-            "ru_majflt": 0
-        },
-        "outputSizePerQuad": 62.0,
         "ru_self_cgstart": {
-            "ru_utime_sec": 0.083751999999999993,
-            "ru_nvcsw": 169,
-            "ru_maxrss_kb": 60444,
-            "ru_stime_sec": 0.032902000000000001,
-            "ru_nivcsw": 3,
-            "ru_minflt": 14095,
-            "ru_majflt": 0
+            "ru_utime_sec": 0.11476699999999999,
+            "ru_nvcsw": 176,
+            "ru_stime_sec": 0.040917000000000002,
+            "ru_maxrss_kb": 60424,
+            "ru_minflt": 14090,
+            "ru_majflt": 0,
+            "ru_nivcsw": 4
         },
-        "mop/quad": 1.8317214700193423,
         "ru_childs_cgstart": {
             "ru_utime_sec": 0.0,
             "ru_nvcsw": 0,
-            "ru_maxrss_kb": 0,
             "ru_stime_sec": 0.0,
-            "ru_nivcsw": 0,
+            "ru_maxrss_kb": 0,
             "ru_minflt": 0,
-            "ru_majflt": 0
+            "ru_majflt": 0,
+            "ru_nivcsw": 0
         },
-        "totalObjSize": 260063,
-        "nMops": 7576,
-        "mopSpeed": 180958.29551425972,
-        "nQuads": 4136,
         "ru_self_end": {
-            "ru_utime_sec": 0.12561800000000001,
-            "ru_nvcsw": 262,
-            "ru_maxrss_kb": 69468,
-            "ru_stime_sec": 0.046600000000000003,
-            "ru_nivcsw": 4,
-            "ru_minflt": 16683,
-            "ru_majflt": 0
+            "ru_utime_sec": 0.174872,
+            "ru_nvcsw": 265,
+            "ru_stime_sec": 0.056958000000000002,
+            "ru_maxrss_kb": 69688,
+            "ru_minflt": 16738,
+            "ru_majflt": 0,
+            "ru_nivcsw": 5
         },
-        "quadSpeed": 98791.382028376218,
-        "CodeGen(%)": 33.328026238277964,
-        "Frontend(%)": 66.671973761722043
+        "nMops": 7556,
+        "mop/quad": 1.818531889290012,
+        "nQuads": 4155,
+        "totalObjSize": 261784,
+        "ru_childs_end": {
+            "ru_utime_sec": 0.0,
+            "ru_nvcsw": 0,
+            "ru_stime_sec": 0.0,
+            "ru_maxrss_kb": 0,
+            "ru_minflt": 0,
+            "ru_majflt": 0,
+            "ru_nivcsw": 0
+        },
+        "quadSpeed": 69129.024207636627,
+        "mopSpeed": 125713.33499708842,
+        "outputSizePerQuad": 63.0,
+        "CodeGen(%)": 34.370854110435062,
+        "Frontend(%)": 65.629145889564938
     },
-    "CompileStatus": "Successful",
+    "LVLData": [
+        "SIM"
+    ],
     "PEModules": [],
-    "SIMBData": {
-        "out": "amcQwB.o",
-        "bytes": 95473
-    },
-    "CompileStrategy": "fullobj",
-    "CurCompileUdps": {},
-    "CurCompileModules": [
-        "...MASTER...",
-        "top"
-    ],
-    "CompileProcesses": [
-        "cgproc.20028.json"
-    ],
+    "CompileStatus": "Successful",
     "Misc": {
-        "csrc": "csrc",
         "cwd": "/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart",
+        "daidir": "simv.daidir",
+        "csrc": "csrc",
+        "archive_dir": "archive.39",
         "daidir_abs": "/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv.daidir",
         "csrc_abs": "/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/csrc",
-        "archive_dir": "archive.30",
-        "daidir": "simv.daidir",
         "default_output_dir": "csrc"
     }
 }

@@ -4,12 +4,12 @@ gui_create_pref_key -category {Globals} -key {load_detail_for_funcov} -value_typ
 # State setting overrides
 gui_state_default_create -off -ini
 gui_set_state_value -category Globals -key recent_sessions -value {{gui_load_session -ignore_errors -file /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/session.inter.vpd.tcl -ignore_errors} {gui_load_session -ignore_errors -file /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/session.inter.vpd.tcl} {gui_load_session -ignore_errors -file /afs/ece.cmu.edu/usr/davidx/Private/18447/lab4-2021-intel-5ghz-space-cooler/output/simulation/session.inter.vpd.tcl -ignore_errors} {gui_load_session -ignore_errors -file /afs/ece.cmu.edu/usr/davidx/Private/18447/lab4-2021-intel-5ghz-space-cooler/output/simulation/session.inter.vpd.tcl} {gui_load_session -ignore_errors -file /afs/ece.cmu.edu/usr/davidx/Private/18447/lab4-2021-intel-5ghz-space-cooler/output/simulation/DVEfiles//crash_05.06-01.31/dve_session05.06-01.31.tcl}}
-gui_set_state_value -category Layout -key child_console_size_x -value 1918
-gui_set_state_value -category Layout -key child_console_size_y -value 307
+gui_set_state_value -category Layout -key child_console_size_x -value 1917
+gui_set_state_value -category Layout -key child_console_size_y -value 306
 gui_set_state_value -category Layout -key child_data_coltype -value 119
 gui_set_state_value -category Layout -key child_data_colvalue -value 149
 gui_set_state_value -category Layout -key child_data_colvariable -value 284
-gui_set_state_value -category Layout -key child_data_size_x -value 500
+gui_set_state_value -category Layout -key child_data_size_x -value 499
 gui_set_state_value -category Layout -key child_data_size_y -value 609
 gui_set_state_value -category Layout -key child_driver_size_x -value 2263
 gui_set_state_value -category Layout -key child_driver_size_y -value 575
@@ -17,23 +17,23 @@ gui_set_state_value -category Layout -key child_hier_col3 -value {-1}
 gui_set_state_value -category Layout -key child_hier_colhier -value 272
 gui_set_state_value -category Layout -key child_hier_colpd -value 0
 gui_set_state_value -category Layout -key child_hier_coltype -value 132
-gui_set_state_value -category Layout -key child_hier_size_x -value 408
+gui_set_state_value -category Layout -key child_hier_size_x -value 407
 gui_set_state_value -category Layout -key child_hier_size_y -value 609
 gui_set_state_value -category Layout -key child_list_down -value 166
 gui_set_state_value -category Layout -key child_list_right -value 443
 gui_set_state_value -category Layout -key child_source_docknewline -value false
 gui_set_state_value -category Layout -key child_source_pos_x -value {-2}
 gui_set_state_value -category Layout -key child_source_pos_y -value {-15}
-gui_set_state_value -category Layout -key child_source_size_x -value 1013
+gui_set_state_value -category Layout -key child_source_size_x -value 1014
 gui_set_state_value -category Layout -key child_source_size_y -value 604
 gui_set_state_value -category Layout -key child_wave_colname -value 276
-gui_set_state_value -category Layout -key child_wave_colvalue -value 276
+gui_set_state_value -category Layout -key child_wave_colvalue -value 277
 gui_set_state_value -category Layout -key child_wave_left -value 557
 gui_set_state_value -category Layout -key child_wave_right -value 1357
 gui_set_state_value -category Layout -key main_pos_x -value 60
-gui_set_state_value -category Layout -key main_pos_y -value 76
-gui_set_state_value -category Layout -key main_size_x -value 1978
-gui_set_state_value -category Layout -key main_size_y -value 1091
+gui_set_state_value -category Layout -key main_pos_y -value 113
+gui_set_state_value -category Layout -key main_size_x -value 1977
+gui_set_state_value -category Layout -key main_size_y -value 1127
 gui_set_state_value -category Layout -key stand_list_child_pos_x -value {-2}
 gui_set_state_value -category Layout -key stand_list_child_pos_y -value {-15}
 gui_set_state_value -category Layout -key stand_list_child_size_x -value 603
@@ -55,10 +55,10 @@ gui_set_state_value -category Layout -key stand_wave_child_pos_x -value {-2}
 gui_set_state_value -category Layout -key stand_wave_child_pos_y -value {-15}
 gui_set_state_value -category Layout -key stand_wave_child_size_x -value 1924
 gui_set_state_value -category Layout -key stand_wave_child_size_y -value 1058
-gui_set_state_value -category Layout -key stand_wave_top_pos_x -value 2601
-gui_set_state_value -category Layout -key stand_wave_top_pos_y -value 37
-gui_set_state_value -category Layout -key stand_wave_top_size_x -value 4520
-gui_set_state_value -category Layout -key stand_wave_top_size_y -value 1199
+gui_set_state_value -category Layout -key stand_wave_top_pos_x -value 2561
+gui_set_state_value -category Layout -key stand_wave_top_pos_y -value 38
+gui_set_state_value -category Layout -key stand_wave_top_size_x -value 4480
+gui_set_state_value -category Layout -key stand_wave_top_size_y -value 1200
 gui_create_state_key -category FindDialog -key m_pMatchCase -value_type bool -value false
 gui_create_state_key -category FindDialog -key m_pMatchWord -value_type bool -value false
 gui_create_state_key -category FindDialog -key m_pUseCombo -value_type string -value {}
@@ -78,7 +78,6 @@ gui_set_pref_value -category {Globals} -key {smart_resize} -value {false}
 gui_set_pref_value -category {Globals} -key {smart_resize} -value {true}
 gui_sim_run Ucli -exe ./simv -args {-ucligui  } -dir .
 gui_list_expand -id  Hier.1   top
-gui_list_select -id Hier.1 -current_item_name top.dut -current_item_type Scope  -selected  { top.dut   }
 gui_list_expand -id  Hier.1   top.dut
 gui_list_select -id Hier.1 -current_item_name top.dut.uart_recv -current_item_type Scope  -selected  { top.dut.uart_recv   }
 gui_list_select -id Data.1 -selected  { top.dut.uart_recv.clk   }
@@ -91,133 +90,350 @@ gui_list_select -id Data.1 -selected  { top.dut.uart_recv.rx_core.clk   }
 gui_list_select -id Data.1 { top.dut.uart_recv.rx_core.rst_n  top.dut.uart_recv.rx_core.bitstream_in  top.dut.uart_recv.rx_core.active_rx  top.dut.uart_recv.rx_core.bit_ready  top.dut.uart_recv.rx_core.rx_bit  top.dut.uart_recv.rx_core.framing_err  top.dut.uart_recv.rx_core.done  {top.dut.uart_recv.rx_core.timing_offset[3:0]}  {top.dut.uart_recv.rx_core.bit_count[2:0]}  top.dut.uart_recv.rx_core.last_logic_level  top.dut.uart_recv.rx_core.resync  top.dut.uart_recv.rx_core.take_sample  top.dut.uart_recv.rx_core.do_edge_count  top.dut.uart_recv.rx_core.did_sample  top.dut.uart_recv.rx_core.cs  top.dut.uart_recv.rx_core.ns   }
 gui_open_window Wave
 gui_list_add -id Wave.2 -from Data.1 { top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.done {top.dut.uart_recv.rx_core.timing_offset[3:0]} {top.dut.uart_recv.rx_core.bit_count[2:0]} top.dut.uart_recv.rx_core.last_logic_level top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.did_sample top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.ns } -insertionbar
-gui_wv_zoom_timerange -id  Wave.2 0 397
-gui_wv_zoom_timerange -id  Wave.2 0 597
 gui_sim_continue  
-gui_sim_stop 
-gui_zoom -window Wave.1 -factor 0.5
-gui_zoom -window Wave.1 -factor 0.5
-gui_zoom -window Wave.1 -factor 0.5
-gui_zoom -window Wave.1 -factor 0.5
-gui_zoom -window Wave.1 -factor 0.5
-gui_zoom -window Wave.1 -factor 0.5
-gui_marker_move -id  Wave.2 C1 39328183
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_zoom_timerange -id  Wave.2 298 729
+gui_wv_zoom_timerange -id  Wave.2 298 743
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 419
+gui_marker_move -id  Wave.2 C1 358
 gui_zoom -window Wave.2 -factor 0.5
 gui_zoom -window Wave.2 -factor 0.5
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
 gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_marker_move -id  Wave.2 C1 23066
+gui_marker_move -id  Wave.2 C1 1039
+gui_marker_move -id  Wave.2 C1 3255
+gui_marker_move -id  Wave.2 C1 13261
+gui_marker_move -id  Wave.2 C1 13335
+gui_marker_move -id  Wave.2 C1 13396
+gui_marker_move -id  Wave.2 C1 13465
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
+gui_marker_move -id  Wave.2 C1 13447
+gui_marker_move -id  Wave.2 C1 13435
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bit_ready   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.framing_err   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.done   }
+gui_marker_move -id  Wave.2 C1 13456
+gui_marker_move -id  Wave.2 C1 13446
+gui_marker_select -id  Wave.2 { C1 }
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
+gui_marker_move -id  Wave.2 C1 13443
+gui_marker_move -id  Wave.2 C1 13445
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_wv_zoom_timerange -id  Wave.2 13234 13668
+gui_wv_zoom_timerange -id  Wave.2 13234 13683
+gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.rx_data_valid   }
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_seek_previous -id Wave.1 -number 1 
+gui_seek_next -id Wave.1 -number 1 
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_zoom -window Wave.1 -factor 0.5
+gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.rx_bitstream   }
+gui_wv_zoom_timerange -id  Wave.2 13219 13655
+gui_wv_zoom_timerange -id  Wave.2 13219 13670
+gui_zoom -window Wave.2 -factor 0.5
+gui_wv_zoom_timerange -id  Wave.2 12994 13867
+gui_wv_zoom_timerange -id  Wave.1 12711 13581
+gui_wv_zoom_timerange -id  Wave.1 12711 13609
+gui_wv_scrollright -id  Wave.1  line
+gui_wv_scrollright -id  Wave.1  line
+gui_wv_scrollright -id  Wave.1  line
+gui_wv_scrollright -id  Wave.1  line
+gui_wv_scrollright -id  Wave.1  line
+gui_wv_scrollright -id  Wave.1  line
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_marker_move -id  Wave.1 C1 11905
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_wv_zoom_timerange -id  Wave.1 11198 12938
+gui_wv_zoom_timerange -id  Wave.2 11468 12342
+gui_wv_zoom_timerange -id  Wave.2 11468 12370
+gui_zoom -window Wave.2 -factor 2
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.last_logic_level   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_list_select -id Wave.2 -selected  { {top.dut.uart_recv.rx_core.timing_offset[3:0]}   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.last_logic_level   }
+gui_marker_move -id  Wave.2 C1 11915
+gui_marker_move -id  Wave.2 C1 11745
 gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.do_edge_count   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.did_sample   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.take_sample   }
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 0.5
-gui_marker_move -id  Wave.2 C1 22633
-gui_zoom -window Wave.2 -factor 2
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
-gui_wv_scrollleft -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 11915
+gui_marker_move -id  Wave.2 C1 11905
+gui_marker_move -id  Wave.2 C1 11915
+gui_marker_move -id  Wave.2 C1 11766
 gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.active_rx   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.take_sample   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.did_sample   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.take_sample   }
-gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.did_sample   }
-gui_marker_move -id  Wave.2 C1 22523
-gui_marker_move -id  Wave.2 C1 22504
+gui_marker_move -id  Wave.2 C1 11905
+gui_marker_move -id  Wave.2 C1 11914
+gui_wv_zoom_timerange -id  Wave.1 11198 12938
 gui_set_env SIMSETUP::SIMCURRENTDIR /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart
 gui_sim_restart -build {clear; vcs -debug -sverilog verif/uart-tb.sv rtl/uart-*}
 gui_sim_continue  
-gui_sim_stop 
+gui_wv_zoom_timerange -id  Wave.1 167415 169155
+gui_wv_zoom_timerange -id  Wave.1 167415 169213
+gui_marker_move -id  Wave.1 C1 13898
 gui_zoom -window Wave.1 -factor 0.5
 gui_zoom -window Wave.1 -factor 0.5
+gui_marker_move -id  Wave.1 C1 15185
+gui_marker_move -id  Wave.1 C1 15025
+gui_marker_move -id  Wave.1 C1 15025
+gui_marker_move -id  Wave.1 C1 15025
+gui_marker_move -id  Wave.1 C1 15025
 gui_zoom -window Wave.1 -factor 2
-gui_marker_move -id  Wave.2 C1 27954280
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_marker_move -id  Wave.2 C1 25301
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.1 -factor 2
+gui_marker_move -id  Wave.1 C1 15064
+gui_marker_move -id  Wave.1 C1 15114
+gui_marker_move -id  Wave.1 C1 15155
+gui_marker_move -id  Wave.1 C1 15155
+gui_marker_move -id  Wave.1 C1 15155
+gui_marker_move -id  Wave.1 C1 15144
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_marker_move -id  Wave.1 C1 15145
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_wv_scrollleft -id  Wave.1  line
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_marker_move -id  Wave.1 C1 13567
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_marker_move -id  Wave.1 C1 13655
+gui_marker_move -id  Wave.1 C1 13619
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 13525
 gui_wv_scrollleft -id  Wave.2  line
 gui_wv_scrollleft -id  Wave.2  line
 gui_wv_scrollleft -id  Wave.2  line
 gui_wv_scrollleft -id  Wave.2  line
-gui_marker_move -id  Wave.2 C1 24874
-gui_zoom -window Wave.2 -factor 2
-gui_zoom -window Wave.2 -factor 2
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.do_edge_count   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_list_select -id Wave.2 -selected  { {top.dut.uart_recv.rx_core.cs[31:0]}   }
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.do_edge_count   }
+gui_sim_restart -build {clear; vcs -debug -sverilog verif/uart-tb.sv rtl/uart-*}
+gui_sim_continue  
+gui_marker_move -id  Wave.1 C1 350
+gui_marker_move -id  Wave.1 C1 25152
+gui_marker_move -id  Wave.1 C1 25138
+gui_marker_move -id  Wave.1 C1 25150
+gui_marker_move -id  Wave.1 C1 25145
+gui_zoom -window Wave.1 -factor 0.5
+gui_zoom -window Wave.1 -factor 0.5
+gui_marker_move -id  Wave.1 C1 23615
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 0.5
+gui_marker_move -id  Wave.2 C1 23769
+gui_marker_move -id  Wave.2 C1 23765
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
 gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.resync   }
+gui_marker_move -id  Wave.2 C1 23942
+gui_marker_move -id  Wave.2 C1 23952
+gui_marker_move -id  Wave.2 C1 23945
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 23955
+gui_marker_move -id  Wave.2 C1 23959
+gui_marker_move -id  Wave.2 C1 24007
+gui_sim_restart -build {clear; vcs -debug -sverilog verif/uart-tb.sv rtl/uart-*}
+gui_sim_continue  
+gui_marker_move -id  Wave.2 C1 25145
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_zoom -window Wave.2 -factor 0.5
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_marker_move -id  Wave.2 C1 23615
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_marker_move -id  Wave.2 C1 23775
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 23947
+gui_marker_move -id  Wave.2 C1 23944
+gui_marker_move -id  Wave.2 C1 23945
+gui_marker_move -id  Wave.2 C1 23965
+gui_marker_move -id  Wave.2 C1 24025
+gui_wv_scrollright -id  Wave.2  page
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 24345
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
 gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.take_sample   }
-gui_marker_move -id  Wave.2 C1 24895
-gui_marker_move -id  Wave.2 C1 24905
+gui_marker_move -id  Wave.2 C1 24335
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.resync   }
+gui_marker_move -id  Wave.2 C1 24235
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 24235
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_marker_move -id  Wave.2 C1 25195
 gui_sim_restart -build {clear; vcs -debug -sverilog verif/uart-tb.sv rtl/uart-*}
 gui_sim_continue  
-gui_zoom -window Wave.1 -factor 2
-gui_zoom -window Wave.1 -factor 2
-gui_zoom -window Wave.1 -factor 2
-gui_zoom -window  Wave.2  -factor 2
+gui_marker_move -id  Wave.2 C1 25222
+gui_marker_move -id  Wave.2 C1 25199
+gui_marker_move -id  Wave.2 C1 25135
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_marker_move -id  Wave.2 C1 23615
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 0.5
 gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 0.5
 gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
-gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.take_sample   }
+gui_seek_next -id Wave.2 -number 1 
+gui_seek_next -id Wave.2 -number 1 
+gui_seek_next -id Wave.2 -number 1 
+gui_seek_next -id Wave.2 -number 1 
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_zoom -window  Wave.2  -full
+gui_wv_scroll_hslidermove -id  Wave.2 121
+gui_zoom -window  Wave.2  -full
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
@@ -225,38 +441,63 @@ gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
 gui_zoom -window Wave.2 -factor 2
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.rx_bit   }
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.rx_bitstream   }
-gui_list_expand -id  Wave.1   {top.dut.uart_recv.rx_data[7:0]}
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.rx_data[0]}   }
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.rx_data_valid   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.rx_data[0]}   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.rx_data[1]}   }
-gui_list_collapse -id  Wave.1   {top.dut.uart_recv.rx_data[7:0]}
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.rx_bitstream   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.rx_data[7:0]}   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.shift_in[7:0]}   }
-gui_list_expand -id  Wave.1   {top.dut.uart_recv.shift_in[7:0]}
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.shift_in[0]}   }
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.xfer_to_buf   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.shift_in[0]}   }
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.bit_ready   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.shift_in[7:0]}   }
-gui_marker_move -id  Wave.1 C1 717
-gui_zoom -window Wave.1 -factor 2
-gui_marker_move -id  Wave.1 C1 475
-gui_marker_move -id  Wave.1 C1 635
-gui_marker_move -id  Wave.1 C1 1425
-gui_marker_move -id  Wave.1 C1 1595
-gui_marker_select -id  Wave.1 { C1 }
-gui_marker_move -id  Wave.1 C1 1585
-gui_wv_scrollleft -id  Wave.1  line
-gui_wv_scrollleft -id  Wave.1  line
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.done   }
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.shift_in[7:0]}   }
-gui_list_select -id Wave.1 -selected  { top.dut.uart_recv.done   }
-gui_list_select -id Wave.1 -selected  {  }
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_list_move  -id  Wave.2    -sid  Wave.2   -after top.dut.uart_recv.rx_core.resync {{top.dut.uart_recv.rx_core.bitstream_in}} 
+gui_marker_move -id  Wave.2 C1 23781
+gui_marker_move -id  Wave.2 C1 24245
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
 gui_sim_restart -build {clear; vcs -debug -sverilog verif/uart-tb.sv rtl/uart-*}
 gui_sim_continue  
-gui_list_select -id Wave.1 -selected  { {top.dut.uart_recv.rx_data[7:0]}   }
-gui_marker_move -id  Wave.1 C1 1650
+gui_marker_move -id  Wave.2 C1 40110
+gui_marker_move -id  Wave.2 C1 40115
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_wv_scrollleft -id  Wave.2  line
+gui_wv_scrollleft -id  Wave.2  line
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_marker_move -id  Wave.2 C1 40155
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.resync   }
+gui_marker_move -id  Wave.2 C1 40205
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 2
+gui_zoom -window Wave.2 -factor 0.5
+gui_zoom -window Wave.2 -factor 0.5
+gui_list_select -id Wave.2 -selected  { top.dut.uart_recv.rx_core.bitstream_in   }
+gui_list_move  -id  Wave.2    -sid  Wave.2   -after top.dut.uart_recv.rx_core.last_logic_level {{top.dut.uart_recv.rx_core.bitstream_in}} 
+gui_wv_scrollright -id  Wave.2  line
+gui_link_wave_window -link -id Wave.2
+gui_link_wave_window -unlink -id Wave.2
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_wv_scrollright -id  Wave.2  line
+gui_zoom -window Wave.2 -factor 0.5
+gui_marker_move -id  Wave.2 C1 41485
+gui_marker_move -id  Wave.2 C1 40195

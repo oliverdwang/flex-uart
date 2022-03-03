@@ -108,7 +108,6 @@ module top();
     if (!packet.randomize())
       $warning("Error with randomizing UART packet");
 
-	$display("startLen: (%d), stopLen: (%d)", packet.startLen, packet.stopLen);
     // Send start bit
     tb_tx <= 1'b0;
     for (int i = 0; i < packet.startLen; i++) begin
@@ -118,8 +117,6 @@ module top();
     // Send all data bits
     for (int i = 0; i < `NUM_DATA_BITS; i++) begin
       tb_tx <= packet.data[i];
-	$display("sending (%b)", packet.data[i]);
-	$display("holding for (%d) cycles", packet.dataLen[i]);
       for (int j = 0; j < packet.dataLen[i]; j++) begin
         @(posedge clk);
       end
@@ -190,7 +187,13 @@ module top();
       wait_for_bit_synchronizer();
 	
       assert (rx_data_valid)
-        else $error("rx_data_valid not set after proper UART packet received");
+        else begin
+	  $error("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+	  for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+	    $error("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+	  end
+	  $error("rx_data_valid not set after proper UART packet received");
+	end
       assert (rx_data == packet.data)
         else $error("t=(%d): Data received (%h) does not match sent data (%h)", $time, rx_data, packet.data);
       // Check that data was receieved properly

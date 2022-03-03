@@ -1,6 +1,6 @@
 # Begin_DVE_Session_Save_Info
 # DVE full session
-# Saved on Wed Mar 2 16:09:28 2022
+# Saved on Wed Mar 2 15:44:35 2022
 # Designs open: 1
 #   Sim: /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv
 # Toplevel windows open: 1
@@ -8,7 +8,7 @@
 #   Source.1: top
 #   Group count = 2
 #   Group Group1 signal count = 19
-#   Group Group2 signal count = 17
+#   Group Group2 signal count = 16
 # End_DVE_Session_Save_Info
 
 # DVE version: K-2015.09_Full64
@@ -67,7 +67,7 @@ if {![gui_exist_window -window TopLevel.1]} {
 } else { 
     set TopLevel.1 TopLevel.1
 }
-gui_show_window -window ${TopLevel.1} -show_state normal -rect {{60 113} {1977 1127}}
+gui_show_window -window ${TopLevel.1} -show_state normal -rect {{60 76} {1978 1091}}
 
 # ToolBar settings
 gui_set_toolbar_attributes -toolbar {TimeOperations} -dock_state top
@@ -114,28 +114,28 @@ gui_show_toolbar -toolbar {Testbench}
 # End ToolBar settings
 
 # Docked window settings
-set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 408]
+set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 409]
 catch { set Hier.1 [gui_share_window -id ${HSPane.1} -type Hier] }
 catch { set Stack.1 [gui_share_window -id ${HSPane.1} -type Stack -silent] }
 catch { set Class.1 [gui_share_window -id ${HSPane.1} -type Class -silent] }
 catch { set Object.1 [gui_share_window -id ${HSPane.1} -type Object -silent] }
-gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 408
+gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 409
 gui_set_window_pref_key -window ${HSPane.1} -key dock_height -value_type integer -value -1
 gui_set_window_pref_key -window ${HSPane.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 407} {height 609} {dock_state left} {dock_on_new_line true} {child_hier_colhier 272} {child_hier_coltype 132} {child_hier_colpd 0} {child_hier_col1 0} {child_hier_col2 1} {child_hier_col3 -1}}
-set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 500]
+gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 408} {height 609} {dock_state left} {dock_on_new_line true} {child_hier_colhier 272} {child_hier_coltype 132} {child_hier_colpd 0} {child_hier_col1 0} {child_hier_col2 1} {child_hier_col3 -1}}
+set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 501]
 catch { set Data.1 [gui_share_window -id ${DLPane.1} -type Data] }
 catch { set Local.1 [gui_share_window -id ${DLPane.1} -type Local -silent] }
 catch { set Member.1 [gui_share_window -id ${DLPane.1} -type Member -silent] }
-gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 500
-gui_set_window_pref_key -window ${DLPane.1} -key dock_height -value_type integer -value 609
+gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 501
+gui_set_window_pref_key -window ${DLPane.1} -key dock_height -value_type integer -value 601
 gui_set_window_pref_key -window ${DLPane.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 499} {height 609} {dock_state left} {dock_on_new_line true} {child_data_colvariable 284} {child_data_colvalue 149} {child_data_coltype 119} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
-set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 307]
-gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer -value 1918
-gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 307
+gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 500} {height 609} {dock_state left} {dock_on_new_line true} {child_data_colvariable 284} {child_data_colvalue 149} {child_data_coltype 119} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
+set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 308]
+gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer -value 1919
+gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 308
 gui_set_window_pref_key -window ${Console.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1917} {height 306} {dock_state bottom} {dock_on_new_line true}}
+gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1918} {height 307} {dock_state bottom} {dock_on_new_line true}}
 #### Start - Readjusting docked view's offset / size
 set dockAreaList { top left right bottom }
 foreach dockArea $dockAreaList {
@@ -179,11 +179,11 @@ gui_update_statusbar_target_frame ${TopLevel.1}
 # DVE Open design session: 
 
 if { [llength [lindex [gui_get_db -design Sim] 0]] == 0 } {
-gui_set_env SIMSETUP::SIMARGS {{-ucligui }}
-gui_set_env SIMSETUP::SIMEXE {/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv}
+gui_set_env SIMSETUP::SIMARGS {{}}
+gui_set_env SIMSETUP::SIMEXE {./simv}
 gui_set_env SIMSETUP::ALLOW_POLL {0}
 if { ![gui_is_db_opened -db {/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv}] } {
-gui_sim_run Ucli -exe simv -args {-ucligui } -dir /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart -nosource
+gui_sim_run Ucli -exe simv -args { -ucligui} -dir /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart -nosource
 }
 }
 if { ![gui_sim_state -check active] } {error "Simulator did not start correctly" error}
@@ -205,20 +205,19 @@ gui_set_time_units 1s
 # Global: Signal Compare
 
 # Global: Signal Groups
-gui_load_child_values {top.dut.uart_recv}
 
 
-set _session_group_7 Group1
-gui_sg_create "$_session_group_7"
-set Group1 "$_session_group_7"
+set _session_group_1 Group1
+gui_sg_create "$_session_group_1"
+set Group1 "$_session_group_1"
 
-gui_sg_addsignal -group "$_session_group_7" { top.dut.uart_recv.clk top.dut.uart_recv.rst_n top.dut.uart_recv.raw_rx_bitstream top.dut.uart_recv.host_ready top.dut.uart_recv.clear_framing_err top.dut.uart_recv.rx_data top.dut.uart_recv.rx_data_valid top.dut.uart_recv.framing_err top.dut.uart_recv.overrun top.dut.uart_recv.rx_bitstream top.dut.uart_recv.active_rx top.dut.uart_recv.bit_ready top.dut.uart_recv.rx_bit top.dut.uart_recv.done top.dut.uart_recv.framing_err_internal top.dut.uart_recv.shift_in top.dut.uart_recv.xfer_to_buf top.dut.uart_recv.cs top.dut.uart_recv.ns }
+gui_sg_addsignal -group "$_session_group_1" { top.dut.uart_recv.clk top.dut.uart_recv.rst_n top.dut.uart_recv.raw_rx_bitstream top.dut.uart_recv.host_ready top.dut.uart_recv.clear_framing_err top.dut.uart_recv.rx_data top.dut.uart_recv.rx_data_valid top.dut.uart_recv.framing_err top.dut.uart_recv.overrun top.dut.uart_recv.rx_bitstream top.dut.uart_recv.active_rx top.dut.uart_recv.bit_ready top.dut.uart_recv.rx_bit top.dut.uart_recv.done top.dut.uart_recv.framing_err_internal top.dut.uart_recv.shift_in top.dut.uart_recv.xfer_to_buf top.dut.uart_recv.cs top.dut.uart_recv.ns }
 
-set _session_group_8 Group2
-gui_sg_create "$_session_group_8"
-set Group2 "$_session_group_8"
+set _session_group_2 Group2
+gui_sg_create "$_session_group_2"
+set Group2 "$_session_group_2"
 
-gui_sg_addsignal -group "$_session_group_8" { top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.timing_offset top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.last_logic_level top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.did_sample top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.ns }
+gui_sg_addsignal -group "$_session_group_2" { top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.timing_offset top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.last_logic_level top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.ns }
 
 # Global: Highlighting
 
@@ -228,7 +227,7 @@ gui_change_stack_mode -mode list
 # Post database loading setting...
 
 # Restore C1 time
-gui_set_time -C1_only 1650
+gui_set_time -C1_only 21485
 
 
 
@@ -274,7 +273,7 @@ gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linka
 gui_list_set_filter -id ${Data.1} -text {*}
 gui_list_show_data -id ${Data.1} {top.dut.uart_recv.rx_core}
 gui_show_window -window ${Data.1}
-catch { gui_list_select -id ${Data.1} {top.dut.uart_recv.rx_core.did_sample top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.ns top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.timing_offset top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.last_logic_level }}
+catch { gui_list_select -id ${Data.1} {top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.timing_offset top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.last_logic_level top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.ns }}
 gui_view_scroll -id ${Data.1} -vertical -set 0
 gui_view_scroll -id ${Data.1} -horizontal -set 0
 gui_view_scroll -id ${Hier.1} -vertical -set 0

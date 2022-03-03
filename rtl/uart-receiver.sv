@@ -216,7 +216,7 @@ module bit_detector
                                        .rst_n,
                                        .load(resync),
                                        .en(do_edge_count),
-                                       .D(4'd0),
+                                       .D(4'd1),
                                        .Q(timing_offset));
 
   counter #(.WIDTH(3),
@@ -294,8 +294,11 @@ module bit_detector
     case(cs)
       IDLE: begin
         if (ns == START_DETECT) begin
-          do_edge_count = 1'b0; // don't count time in IDLE
+          do_edge_count = 1'b1; // don't count time in IDLE
         end
+	else begin
+	 do_edge_count = 1'b0;
+	end
       end
       // take sample at the middle of the cycle
       START_DETECT: take_sample = (timing_offset == 4'd7) ? 1'b1 : 1'b0;
@@ -358,7 +361,7 @@ module bit_detector
   end
 
   // when we detect an edge, resync the timing register
-  assign resync = ((bitstream_in != last_logic_level) && (timing_offset == 4'd1 || timing_offset == 4'd14)) ? 1'b1 : 1'b0;
+  assign resync = ((bitstream_in != last_logic_level) && (timing_offset <= 4'd2 || timing_offset >= 4'd13)) ? 1'b1 : 1'b0;
 
 
 endmodule: bit_detector
