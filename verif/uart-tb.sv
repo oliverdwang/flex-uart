@@ -20,7 +20,7 @@ class uartPkt;
       dataLen[i] inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};
     }
   }
-  constraint stopBit {startLen inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
+  constraint stopBit {stopLen inside {[`MIN_BIT_LEN:`MAX_BIT_LEN]};}
 
 endclass: uartPkt
 
@@ -64,8 +64,7 @@ module top();
     nominal_uart_rx_test();
 
     @(posedge clk);
-    
-
+    end_simulation();
     // Send packets from the host interface
     nominal_uart_tx_test();
 
@@ -109,6 +108,7 @@ module top();
     if (!packet.randomize())
       $warning("Error with randomizing UART packet");
 
+	$display("startLen: (%d), stopLen: (%d)", packet.startLen, packet.stopLen);
     // Send start bit
     tb_tx <= 1'b0;
     for (int i = 0; i < packet.startLen; i++) begin
@@ -117,8 +117,9 @@ module top();
 
     // Send all data bits
     for (int i = 0; i < `NUM_DATA_BITS; i++) begin
-      $display("packet data is ", packet.data[i]);
       tb_tx <= packet.data[i];
+	$display("sending (%b)", packet.data[i]);
+	$display("holding for (%d) cycles", packet.dataLen[i]);
       for (int j = 0; j < packet.dataLen[i]; j++) begin
         @(posedge clk);
       end
@@ -182,15 +183,16 @@ module top();
 
   task nominal_uart_rx_test;
     for(int i = 0; i < `NUM_TRIALS; i++) begin
+      $display("on task (%d)", i);
       reset_context();
 
       tb_send_packet();
       wait_for_bit_synchronizer();
-
+	
       assert (rx_data_valid)
         else $error("rx_data_valid not set after proper UART packet received");
       assert (rx_data == packet.data)
-        else $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
+        else $error("t=(%d): Data received (%h) does not match sent data (%h)", $time, rx_data, packet.data);
       // Check that data was receieved properly
       // let's handshake to the UART that we are ready to latch in data
       rx_data_ready <= 1'b1;
