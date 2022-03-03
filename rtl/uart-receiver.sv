@@ -296,9 +296,9 @@ module bit_detector
         if (ns == START_DETECT) begin
           do_edge_count = 1'b1; // don't count time in IDLE
         end
-	else begin
-	 do_edge_count = 1'b0;
-	end
+        else begin
+        do_edge_count = 1'b0;
+        end
       end
       // take sample at the middle of the cycle
       START_DETECT: take_sample = (timing_offset == 4'd7) ? 1'b1 : 1'b0;

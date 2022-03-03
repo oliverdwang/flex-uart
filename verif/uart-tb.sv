@@ -188,14 +188,20 @@ module top();
 	
       assert (rx_data_valid)
         else begin
-	  $error("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
-	  for (int i = 0; i < `NUM_DATA_BITS; i++) begin
-	    $error("bit (%d) duration: (%d)", i, packet.dataLen[i]);
-	  end
-	  $error("rx_data_valid not set after proper UART packet received");
-	end
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
       assert (rx_data == packet.data)
-        else $error("t=(%d): Data received (%h) does not match sent data (%h)", $time, rx_data, packet.data);
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
+        end
       // Check that data was receieved properly
       // let's handshake to the UART that we are ready to latch in data
       rx_data_ready <= 1'b1;
