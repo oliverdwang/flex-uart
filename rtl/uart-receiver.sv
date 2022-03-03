@@ -292,7 +292,11 @@ module bit_detector
     take_sample = 1'b0;
     do_edge_count = 1'b1;
     case(cs)
-      IDLE: do_edge_count = 1'b0; // don't count time in IDLE
+      IDLE: begin
+        if (ns == START_DETECT) begin
+          do_edge_count = 1'b0; // don't count time in IDLE
+        end
+      end
       // take sample at the middle of the cycle
       START_DETECT: take_sample = (timing_offset == 4'd7) ? 1'b1 : 1'b0;
       RX_SAMPLING: begin

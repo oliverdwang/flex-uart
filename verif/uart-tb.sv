@@ -64,6 +64,7 @@ module top();
     nominal_uart_rx_test();
 
     @(posedge clk);
+    
 
     // Send packets from the host interface
     nominal_uart_tx_test();
