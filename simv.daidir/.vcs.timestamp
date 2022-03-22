@@ -33,24 +33,30 @@ rtl/uart-receiver.sv
 rtl/uart-top.sv
 rtl/uart-transmitter.sv
 verif/uart-tb.sv
-89
+103
 sysc_uni_pwd=/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart
 no_proxy=localhost,127.0.0.1,.cmu.edu,.cmu.local
 https_proxy=http://proximus.ece.cmu.edu:3128/
 http_proxy=http://proximus.ece.cmu.edu:3128/
 ftp_proxy=http://proximus.ece.cmu.edu:3128/
 binpath=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/linux64/bin
-XTERM_VERSION=X.Org 7.6.0(295)
-XTERM_SHELL=/bin/bash
-XTERM_LOCALE=C
-XDG_SESSION_ID=1520
+XDG_VTNR=1
+XDG_SESSION_TYPE=x11
+XDG_SESSION_ID=267
+XDG_SESSION_DESKTOP=gnome-classic
+XDG_SEAT=seat0
 XDG_RUNTIME_DIR=/run/user/2644831
-XDG_DATA_DIRS=/afs/andrew.cmu.edu/usr18/davidx/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
-XAUTHORITY=/var/db/fastx3/sessions/davidx/FX3-5ae135cb23bc1c722dca4fd53f907e86/authority
+XDG_MENU_PREFIX=gnome-
+XDG_DATA_DIRS=/afs/andrew.cmu.edu/usr18/davidx/.local/share/flatpak/exports/share/:/var/lib/flatpak/exports/share/:/usr/local/share/:/usr/share/
+XDG_CURRENT_DESKTOP=GNOME-Classic:GNOME
+XAUTHORITY=/run/gdm/auth-for-davidx-NNV9QZ/database
+WINDOWPATH=1:1:1:1:1:1:1:1:1
+VTE_VERSION=5204
 VOLTUS_TEMPUS_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/ssv-19.12.000/tools.lnx86
 VMR_MODE_FLAG=32
 VCS_VERSION=vcs-mx_vK-2015.09
 VCS_TARGET_ARCH=amd64
+VCS_STOP_SAFE=1
 VCS_PATHMAP_PRELOAD_DONE=1
 VCS_MX_HOME_INTERNAL=1
 VCS_MODE_FLAG=64
@@ -60,23 +66,22 @@ VCS_DEPTH=0
 VCS_ARG_ADDED_FOR_TMP=1
 VCS_ARCH_OVERRIDE=linux
 VCS_ARCH=linux64
+USERNAME=davidx
 UNAME=/bin/uname
 TOOL_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64
 TCLLIBPATH=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/auxx/tcllib/lib/tcl8.4 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/auxx/tcllib/snps_tcl
 SYNOPSYS_LICENSE=/afs/ece.cmu.edu/support/synopsys/license.dat
 SYNOPSYS_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release
-SSH_CONNECTION=172.26.49.63 57554 172.19.136.192 22
-SSH_CLIENT=172.26.49.63 57554 22
-SSH_AUTH_SOCK=/tmp/FastX-5ae135cb23bc1c722dca4fd53f907e86/agent.7139
+SSH_AUTH_SOCK=/run/user/2644831/keyring/ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SSH_AGENT_PID=22751
 SPECMAN_OUTPUT_TO_TTY=1
 SIM_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/xcelium-19.03.010/tools.lnx86
-SELINUX_USE_CURRENT_RANGE=
-SELINUX_ROLE_REQUESTED=
-SELINUX_LEVEL_REQUESTED=
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/22730,unix/unix:/tmp/.ICE-unix/22730
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
+QT_IM_MODULE=ibus
 QT_GRAPHICSSYSTEM_CHECKED=1
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
@@ -96,25 +101,34 @@ LOADEDMODULES=
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 LEC_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/confrml-18.10.300/tools.lnx86
 LC_ALL=C
-KRB5CCNAME=/tmp/krb5cc_2644831_HDqxDL
+KRB5CCNAME=KEYRING:persistent:2644831
 KDEDIRS=/usr
 INNOV_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/innovus-19.10.000/tools.lnx86
 HTTP_PROXY=http://proximus.ece.cmu.edu:3128/
 HTTPS_PROXY=http://proximus.ece.cmu.edu:3128/
 HISTCONTROL=ignoredups
+GNOME_SHELL_SESSION_MODE=classic
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+GJS_DEBUG_OUTPUT=stderr
+GIO_LAUNCHED_DESKTOP_FILE_PID=23394
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/xfce4-terminal.desktop
 GENUS_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/genus-18.14.000/tools.lnx86
+GDM_LANG=en_US.UTF-8
+GDMSESSION=gnome-classic
 FTP_PROXY=http://proximus.ece.cmu.edu:3128/
-FASTX_SESSION_ID=5ae135cb23bc1c722dca4fd53f907e86
-FASTX_SESSION_DIR=/var/db/fastx3/sessions/davidx/FX3-5ae135cb23bc1c722dca4fd53f907e86
 ECE725_HOME=/afs/ece.cmu.edu/usr/davidx/Private/18725
 ECE725_CLASS=/afs/ece/class/ece725
 DVE_SIM_SELECT_LOOP=on
 DVE_PSTACK=/usr/bin/gstack
 DVE_AUXX_GUI=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/auxx/gui
 DVE=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve
+DESKTOP_SESSION=gnome-classic
 DC_VERSION=syn-vJ-2014.09-SP4
 DC_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/syn-vJ-2014.09-SP4
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ZK33b2vDRV,guid=8c618770436a4f67bbaed569623a2fc7
 CVS_RSH=ssh
+COLORTERM=truecolor
 CMD=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/linux64/bin/dve.exe
 CDS_Netlisting_Mode=Analog
 CDS_LIC_FILE=5280@cadence-lic.ece.cmu.edu
@@ -127,13 +141,13 @@ AKLOG=/usr/bin/aklog
 6
 1646168766 rtl/uart-transmitter.sv
 1646169426 rtl/uart-top.sv
-1646275901 rtl/uart-receiver.sv
+1647985691 rtl/uart-receiver.sv
 1646193887 rtl/uart-lib.sv
-1646274081 verif/uart-tb.sv
+1647986731 verif/uart-tb.sv
 1440562444 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/vcsd.tab
 4
 0 
 1440563255 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/libvirsim.so
 1440562843 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/liberrorinf.so
 1440562824 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/libsnpsmalloc.so
-1646276007 simv.daidir
+1647986765 simv.daidir

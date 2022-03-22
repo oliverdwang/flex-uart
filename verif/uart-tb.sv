@@ -37,6 +37,7 @@ module top();
   // Host rx interface
   logic rx_data_valid, rx_data_ready;
   logic [7:0] rx_data;
+  logic rx_framing_err, rx_framing_err_clr, rx_overrun;
 
   uart dut(.clk,
            .rst_n,
@@ -47,10 +48,14 @@ module top();
            .tx_data,
            .rx_data_valid,
            .rx_data_ready,
-           .rx_data);
+           .rx_data,
+           .rx_framing_err,
+           .rx_framing_err_clr,
+           .rx_overrun);
 
 
   uartPkt packet = new;
+  logic [7:0] temp;
 
   // Clock generator
   initial begin
@@ -62,6 +67,14 @@ module top();
   initial begin
     // Receive packets with host interface ready
     nominal_uart_rx_test();
+
+    uart_basic_rx_overrun_test();
+
+    uart_rx_overrun_reset_test();
+
+    uart_rx_basic_framing_test();
+
+    uart_rx_framing_reset_test();
 
     @(posedge clk);
     end_simulation();
@@ -78,6 +91,7 @@ module top();
 
   task reset_context;
     rst_n <= 1'b1;
+    rx_framing_err_clr <= 1'b0;
 
     tb_tx <= 1'b1;
     tx_data_valid <= 1'b0;
@@ -100,13 +114,65 @@ module top();
     $finish;
   endtask
 
+  task generate_packet;
+    int cur_bit;
+    int prev_bit;
+    int sum = 0;
+    int done = 0;
+    int num_bits = 1;
+    while (!done) begin
+      if (!packet.randomize()) begin
+        $warning("Error with generating random UART packet");
+        done = 1;
+      end
+      else begin
+        int violated = 0;
+        for (int i = 0; i < `NUM_DATA_BITS + 1; i++) begin
+          if (i == 0) begin
+            cur_bit = 0;
+            prev_bit = cur_bit;
+          end
+          else begin
+            cur_bit = packet.data[i-1];
+            if (cur_bit == prev_bit) begin
+              sum += packet.dataLen[i-1];
+              num_bits++;
+            end
+            else begin
+              sum = packet.dataLen[i-1];
+              num_bits = 1;
+            end
+            if (num_bits * `SPEC_BIT_LEN > sum) begin
+              if (num_bits * `SPEC_BIT_LEN - sum >= `SPEC_BIT_LEN/2) begin
+                violated = 1;
+                break;
+              end
+            end
+            else begin
+              if (sum - num_bits * `SPEC_BIT_LEN >= `SPEC_BIT_LEN/2) begin
+                violated = 1;
+                $display("violated, restarting, num_bits (%d), total len: (%d)", num_bits, sum);
+                $display("packet was (%b)", packet.data);
+                $display("i was (%d)", i);
+                break;
+              end
+            end
+            prev_bit = cur_bit;
+          end
+        end
+        if (!violated) begin
+          done = 1;
+        end
+      end
+    end
+  endtask
+
   /**
    * Task to simplify simulating a packet being sent from an external device
    * to the UART module and receiving it on the host interface
    */
   task tb_send_packet;
-    if (!packet.randomize())
-      $warning("Error with randomizing UART packet");
+    generate_packet();
 
     // Send start bit
     tb_tx <= 1'b0;
@@ -130,12 +196,42 @@ module top();
   endtask
 
   /**
+   * Task to simplify simulating a packet being sent that contains
+   * an obvious framing error by not having a stop bit sent correctly
+   */
+  task tb_send_packet_bad_frame;
+    generate_packet();
+
+    // Send start bit
+    tb_tx <= 1'b0;
+    for (int i = 0; i < packet.startLen; i++) begin
+      @(posedge clk);
+    end
+
+    // Send all data bits
+    for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+      tb_tx <= packet.data[i];
+      for (int j = 0; j < packet.dataLen[i]; j++) begin
+        @(posedge clk);
+      end
+    end
+
+    // Send no stop bit
+    tb_tx <= 1'b0;
+    for (int i = 0; i < packet.stopLen; i++) begin
+      @(posedge clk);
+    end
+    // reset to high
+    tb_tx <= 1'b1;
+  endtask
+  
+
+  /**
    * Task to simplify simulating a packet being sent from the host interface to
    * an external device through the UART module
    */
   task tb_receive_packet;
-    if (!packet.randomize())
-      $warning("Error with randomizing UART packet");
+    generate_packet();
 
     // Wait for transmit interface to free up
     while (!tx_data_ready) begin
@@ -180,7 +276,6 @@ module top();
 
   task nominal_uart_rx_test;
     for(int i = 0; i < `NUM_TRIALS; i++) begin
-      $display("on task (%d)", i);
       reset_context();
 
       tb_send_packet();
@@ -216,9 +311,236 @@ module top();
 
       // TODO: this is not technically true valid/ready requirement
       assert (!rx_data_valid)
-        else $error("rx_data_valid still set after acknowledgement with unsetting rx_data_ready");
+        else $error("rx_data_valid still set after acknowledgement with rx_data_ready");
     end
   endtask
+
+  task uart_basic_rx_overrun_test;
+    for (int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context();
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == packet.data)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
+        end
+      temp <= packet.data;
+      @(posedge clk);
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == temp)
+        else begin
+          $error("Data received (%h) changed even though we didn't read from it. Original: (%h)", rx_data, temp);
+        end
+
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == temp)
+        else begin
+          $error("Data received (%h) changed even though we didn't read from it. Original: (%h)", rx_data, temp);
+        end
+      assert (rx_overrun)
+        else begin
+          $error("Overrun not set despite buffers being overrun");
+        end
+    end
+  endtask
+
+
+  task uart_rx_overrun_reset_test;
+    for (int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context();
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == packet.data)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
+        end
+      temp <= packet.data;
+      @(posedge clk);
+
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == temp)
+        else begin
+          $error("Data received (%h) changed even though we didn't read from it. Original: (%h)", rx_data, temp);
+        end
+
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == temp)
+        else begin
+          $error("Data received (%h) changed even though we didn't read from it. Original: (%h)", rx_data, temp);
+        end
+      assert (rx_overrun)
+        else begin
+          $error("Overrun not set despite buffers being overrun");
+        end
+
+            // Check that data was receieved properly
+      // let's handshake to the UART that we are ready to latch in data
+      rx_data_ready <= 1'b1;
+      @(posedge clk);
+      while (!rx_data_valid) begin
+        @(posedge clk);
+      end
+      // at this point, we know rx_data_read & rx_data_valid
+      // transfer will occur
+      @(posedge clk);
+
+      assert (~rx_overrun)
+        else begin
+          $error("overrun not cleared after reading");
+        end
+
+      // TODO: this is not technically true valid/ready requirement
+      assert (!rx_data_valid)
+        else begin
+          $error("rx_data_valid still set after acknowledgement with rx_data_ready");
+        end
+
+      @(posedge clk);
+
+      assert (rx_data_valid)
+        else begin
+          $error("rx_data_valid not set even though buffer should contain valid data");
+        end
+      
+      assert (~rx_overrun)
+        else begin
+          $error("overrun erroneously set after unloading 1 buffer");
+        end
+    end
+  endtask
+
+  task uart_rx_basic_framing_test;
+    reset_context();
+    tb_send_packet_bad_frame();
+    wait_for_bit_synchronizer();
+    assert (rx_data_valid)
+      else begin
+        $error("push out data as best effort, but we didn't signal valid");
+      end
+    assert (rx_framing_err)
+      else begin
+        $error("framing error should have been asserted but was not");
+      end
+  endtask
+
+  task uart_rx_framing_reset_test;
+    reset_context();
+    tb_send_packet_bad_frame();
+    wait_for_bit_synchronizer();
+    assert (rx_data_valid)
+      else begin
+        $error("push out data as best effort, but we didn't signal valid");
+      end
+    assert (rx_framing_err)
+      else begin
+        $error("framing error should have been asserted but was not");
+      end
+    rx_framing_err_clr <= 1'b1;
+    @(posedge clk);
+    rx_framing_err_clr <= 1'b0;
+    @(posedge clk);
+
+    assert (~rx_framing_err)
+      else begin
+        $error("framing error should have been cleared but was not");
+      end
+    
+    tb_send_packet_bad_frame();
+    wait_for_bit_synchronizer();
+    assert (rx_data_valid)
+      else begin
+        $error("push out data as best effort, but we didn't signal valid");
+      end
+    assert (rx_framing_err)
+      else begin
+        $error("framing error should have been asserted but was not");
+      end
+    // send a normal packet now, framing err should still be set from previous bad txn
+    tb_send_packet();
+    wait_for_bit_synchronizer();
+    assert (rx_data_valid)
+      else begin
+        $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+        for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+          $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+        end
+        $error("rx_data_valid not set after proper UART packet received");
+      end
+    assert (rx_framing_err)
+      else begin
+        $error("framing error should've persisted but didn't");
+      end
+    rx_framing_err_clr <= 1'b1;
+    @(posedge clk);
+    @(posedge clk);
+
+    assert (~rx_framing_err)
+      else begin
+        $error("framing error should have been cleared but was not");
+      end
+  endtask
+
+
 
   task nominal_uart_tx_test;
     for (int i = 0; i < `NUM_TRIALS; i++) begin
