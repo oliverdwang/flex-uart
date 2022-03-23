@@ -25,15 +25,6 @@ module receiver
   logic [7:0] shift_in;
   logic xfer_to_buf;
 
-  bit_detector rx_core(.clk,
-                       .rst_n,
-                       .bitstream_in(rx_bitstream),
-                       .active_rx,
-                       .bit_ready,
-                       .rx_bit,
-                       .framing_err(framing_err_internal),
-                       .done);
-
   enum {
     IDLE_BUF_EMPTY,
     RX_IN_PROG,
@@ -44,6 +35,17 @@ module receiver
     UNLOAD_BUF,
     UNLOAD_BUF_FULL
   } cs, ns;
+
+  bit_detector rx_core(.clk,
+                       .rst_n,
+                       .bitstream_in((cs != FULL_OVERRUN) ? rx_bitstream : 1'b1),
+                       .active_rx,
+                       .bit_ready,
+                       .rx_bit,
+                       .framing_err(framing_err_internal),
+                       .done);
+
+
 
   // state register
   always_ff @(posedge clk) begin
@@ -237,7 +239,8 @@ module bit_detector
     IDLE,
     START_DETECT,
     RX_SAMPLING,
-    STOP_DETECT
+    STOP_DETECT,
+    STOP_COOLDOWN
   } cs, ns;
 
   // State update
@@ -278,7 +281,10 @@ module bit_detector
         end
       end
       STOP_DETECT: begin
-        ns = (timing_offset == 4'd8) ? IDLE : STOP_DETECT;
+        ns = (timing_offset == 4'd8) ? STOP_COOLDOWN : STOP_DETECT;
+      end
+      STOP_COOLDOWN: begin
+        ns = (timing_offset == 4'd15) ? IDLE : STOP_COOLDOWN;
       end
       default: ns = IDLE;
     endcase
@@ -311,6 +317,9 @@ module bit_detector
         take_sample = (timing_offset == 4'd7) ? 1'b1 : 1'b0;
         done = (timing_offset == 4'd8) ? 1'b1 : 1'b0;
         framing_err = (~rx_bit && timing_offset == 4'd8) ? 1'b1 : 1'b0;
+      end
+      STOP_COOLDOWN: begin
+        // nothing to add here, just count edges
       end
     endcase
   end
@@ -361,7 +370,14 @@ module bit_detector
   end
 
   // when we detect an edge, resync the timing register
-  assign resync = ((bitstream_in != last_logic_level) && (timing_offset <= 4'd2 || timing_offset >= 4'd13)) ? 1'b1 : 1'b0;
+  always_comb begin
+    if (cs == IDLE) begin
+      resync = 1'b1; // so we can reset during IDLE
+    end
+    else begin
+      resync = ((bitstream_in != last_logic_level) && (timing_offset <= 4'd2 || timing_offset >= 4'd13)) ? 1'b1 : 1'b0;
+    end
+  end
 
 
 endmodule: bit_detector

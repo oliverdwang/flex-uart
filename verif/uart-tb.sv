@@ -66,15 +66,17 @@ module top();
   // Test suite
   initial begin
     // Receive packets with host interface ready
-    nominal_uart_rx_test();
+    // nominal_uart_rx_test();
 
-    uart_basic_rx_overrun_test();
+    // uart_basic_rx_overrun_test();
 
-    uart_rx_overrun_reset_test();
+    // uart_rx_overrun_reset_test();
 
-    uart_rx_basic_framing_test();
+    // uart_rx_basic_framing_test();
 
-    uart_rx_framing_reset_test();
+    // uart_rx_framing_reset_test();
+
+    uart_send_random_shit_test();
 
     @(posedge clk);
     end_simulation();
@@ -273,6 +275,85 @@ module top();
   /***************************************************************************/
   /* WRITTEN TESTS                                                           */
   /***************************************************************************/
+
+  task uart_send_random_shit_test;
+    int num_bits;
+    int bitLen[];
+    int inBits[];
+    for (int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context();
+      num_bits = $urandom_range(256,16); // generate 16-256 bits
+      bitLen = new [num_bits];
+      inBits = new [num_bits];
+      for (int j = 0; j < num_bits; j++) begin
+        bitLen[j] = $urandom_range(64,5); // and each bit held for between 5 and 64 edges for funsies
+        inBits[j] = $urandom_range(1,0); // generate 1s and 0s
+      end 
+      
+      for (int j = 0; j < num_bits; j++) begin
+        tb_tx <= inBits[j];
+        for (int k = 0; k < bitLen[j]; k++) begin
+          @(posedge clk);
+        end
+      end // send random crap
+
+
+      tb_tx <= 1'b1; // reset it to high line
+      @(posedge clk);
+
+      if (rx_data_valid) begin
+        // read and clear the errors, put it into a known state
+        rx_data_ready <= 1'b1;
+        rx_framing_err_clr <= 1'b1;
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        rx_data_ready <= 1'b0;
+        rx_framing_err_clr <= 1'b0;
+        @(posedge clk);
+      end
+
+      tb_send_packet();
+      wait_for_bit_synchronizer();
+	
+      assert (rx_data_valid)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("rx_data_valid not set after proper UART packet received");
+        end
+      assert (rx_data == packet.data)
+        else begin
+          $display("startLen: (%d), stopLen: (%d), data: (%b)", packet.startLen, packet.stopLen, packet.data);
+          for (int i = 0; i < `NUM_DATA_BITS; i++) begin
+            $display("bit (%d) duration: (%d)", i, packet.dataLen[i]);
+          end
+          $error("Data received (%h) does not match sent data (%h)", rx_data, packet.data);
+        end
+      // Check that data was receieved properly
+      // let's handshake to the UART that we are ready to latch in data
+      rx_data_ready <= 1'b1;
+      @(posedge clk);
+      while (!rx_data_valid) begin
+        @(posedge clk);
+      end
+      // at this point, we know rx_data_read & rx_data_valid
+      // transfer will occur
+      rx_data_ready <= 1'b0;
+      @(posedge clk);
+
+      // TODO: this is not technically true valid/ready requirement
+      assert (!rx_data_valid)
+        else $error("rx_data_valid still set after acknowledgement with rx_data_ready");
+
+
+
+    end
+
+  endtask
 
   task nominal_uart_rx_test;
     for(int i = 0; i < `NUM_TRIALS; i++) begin
