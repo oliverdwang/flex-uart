@@ -1,14 +1,14 @@
 # Begin_DVE_Session_Save_Info
 # DVE full session
-# Saved on Wed Mar 23 17:34:01 2022
+# Saved on Thu Mar 24 15:50:18 2022
 # Designs open: 1
 #   Sim: /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/simv
 # Toplevel windows open: 1
 # 	TopLevel.1
 #   Source.1: top
 #   Group count = 2
-#   Group Group1 signal count = 19
-#   Group Group2 signal count = 17
+#   Group Group1 signal count = 16
+#   Group Group2 signal count = 2
 # End_DVE_Session_Save_Info
 
 # DVE version: K-2015.09_Full64
@@ -67,7 +67,7 @@ if {![gui_exist_window -window TopLevel.1]} {
 } else { 
     set TopLevel.1 TopLevel.1
 }
-gui_show_window -window ${TopLevel.1} -show_state normal -rect {{220 357} {2132 1368}}
+gui_show_window -window ${TopLevel.1} -show_state normal -rect {{358 186} {2268 1195}}
 
 # ToolBar settings
 gui_set_toolbar_attributes -toolbar {TimeOperations} -dock_state top
@@ -114,28 +114,28 @@ gui_show_toolbar -toolbar {Testbench}
 # End ToolBar settings
 
 # Docked window settings
-set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 400]
+set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 398]
 catch { set Hier.1 [gui_share_window -id ${HSPane.1} -type Hier] }
 catch { set Stack.1 [gui_share_window -id ${HSPane.1} -type Stack -silent] }
 catch { set Class.1 [gui_share_window -id ${HSPane.1} -type Class -silent] }
 catch { set Object.1 [gui_share_window -id ${HSPane.1} -type Object -silent] }
-gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 400
+gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 398
 gui_set_window_pref_key -window ${HSPane.1} -key dock_height -value_type integer -value -1
 gui_set_window_pref_key -window ${HSPane.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 399} {height 614} {dock_state left} {dock_on_new_line true} {child_hier_colhier 272} {child_hier_coltype 132} {child_hier_colpd 0} {child_hier_col1 0} {child_hier_col2 1} {child_hier_col3 -1}}
-set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 492]
+gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 397} {height 614} {dock_state left} {dock_on_new_line true} {child_hier_colhier 272} {child_hier_coltype 132} {child_hier_colpd 0} {child_hier_col1 0} {child_hier_col2 1} {child_hier_col3 -1}}
+set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 490]
 catch { set Data.1 [gui_share_window -id ${DLPane.1} -type Data] }
 catch { set Local.1 [gui_share_window -id ${DLPane.1} -type Local -silent] }
 catch { set Member.1 [gui_share_window -id ${DLPane.1} -type Member -silent] }
-gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 492
+gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 490
 gui_set_window_pref_key -window ${DLPane.1} -key dock_height -value_type integer -value 614
 gui_set_window_pref_key -window ${DLPane.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 491} {height 614} {dock_state left} {dock_on_new_line true} {child_data_colvariable 284} {child_data_colvalue 149} {child_data_coltype 119} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
-set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 299]
-gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer -value 1913
-gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 299
+gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 489} {height 614} {dock_state left} {dock_on_new_line true} {child_data_colvariable 284} {child_data_colvalue 149} {child_data_coltype 119} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
+set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 297]
+gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer -value 1911
+gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 297
 gui_set_window_pref_key -window ${Console.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1912} {height 298} {dock_state bottom} {dock_on_new_line true}}
+gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1910} {height 296} {dock_state bottom} {dock_on_new_line true}}
 #### Start - Readjusting docked view's offset / size
 set dockAreaList { top left right bottom }
 foreach dockArea $dockAreaList {
@@ -205,20 +205,21 @@ gui_set_time_units 1s
 # Global: Signal Compare
 
 # Global: Signal Groups
-gui_load_child_values {top.dut.uart_recv}
+gui_load_child_values {top.uart_tx_full_test}
+gui_load_child_values {top.dut.uart_write}
 
 
-set _session_group_5 Group1
-gui_sg_create "$_session_group_5"
-set Group1 "$_session_group_5"
-
-gui_sg_addsignal -group "$_session_group_5" { top.dut.uart_recv.clk top.dut.uart_recv.rst_n top.dut.uart_recv.raw_rx_bitstream top.dut.uart_recv.host_ready top.dut.uart_recv.clear_framing_err top.dut.uart_recv.rx_data top.dut.uart_recv.rx_data_valid top.dut.uart_recv.framing_err top.dut.uart_recv.overrun top.dut.uart_recv.rx_bitstream top.dut.uart_recv.active_rx top.dut.uart_recv.bit_ready top.dut.uart_recv.rx_bit top.dut.uart_recv.done top.dut.uart_recv.framing_err_internal top.dut.uart_recv.shift_in top.dut.uart_recv.xfer_to_buf top.dut.uart_recv.cs top.dut.uart_recv.ns }
-
-set _session_group_6 Group2
+set _session_group_6 Group1
 gui_sg_create "$_session_group_6"
-set Group2 "$_session_group_6"
+set Group1 "$_session_group_6"
 
-gui_sg_addsignal -group "$_session_group_6" { top.dut.uart_recv.rx_core.clk top.dut.uart_recv.rx_core.rst_n top.dut.uart_recv.rx_core.bitstream_in top.dut.uart_recv.rx_core.active_rx top.dut.uart_recv.rx_core.bit_ready top.dut.uart_recv.rx_core.rx_bit top.dut.uart_recv.rx_core.framing_err top.dut.uart_recv.rx_core.done top.dut.uart_recv.rx_core.timing_offset top.dut.uart_recv.rx_core.bit_count top.dut.uart_recv.rx_core.last_logic_level top.dut.uart_recv.rx_core.resync top.dut.uart_recv.rx_core.take_sample top.dut.uart_recv.rx_core.do_edge_count top.dut.uart_recv.rx_core.did_sample top.dut.uart_recv.rx_core.cs top.dut.uart_recv.rx_core.ns }
+gui_sg_addsignal -group "$_session_group_6" { top.dut.uart_write.clk top.dut.uart_write.rst_n top.dut.uart_write.tx_data_valid top.dut.uart_write.tx_data top.dut.uart_write.tx_data_ready top.dut.uart_write.tx_serial_out top.dut.uart_write.latched_tx_data top.dut.uart_write.count top.dut.uart_write.shift_out top.dut.uart_write.latch_data top.dut.uart_write.xfer_to_shift top.dut.uart_write.do_tx top.dut.uart_write.do_shift top.dut.uart_write.last_bit_tx top.dut.uart_write.ns top.dut.uart_write.cs }
+
+set _session_group_7 Group2
+gui_sg_create "$_session_group_7"
+set Group2 "$_session_group_7"
+
+gui_sg_addsignal -group "$_session_group_7" { top.uart_tx_full_test.temp1 top.uart_tx_full_test.temp2 }
 
 # Global: Highlighting
 
@@ -228,7 +229,7 @@ gui_change_stack_mode -mode list
 # Post database loading setting...
 
 # Restore C1 time
-gui_set_time -C1_only 2316749
+gui_set_time -C1_only 10008245
 
 
 
@@ -253,6 +254,8 @@ gui_list_set_filter -id ${Hier.1} -list { {Package 1} {All 0} {Process 1} {VirtP
 gui_list_set_filter -id ${Hier.1} -text {*}
 gui_hier_list_init -id ${Hier.1}
 gui_change_design -id ${Hier.1} -design Sim
+catch {gui_list_expand -id ${Hier.1} top}
+catch {gui_list_select -id ${Hier.1} {top.uart_tx_full_test}}
 gui_view_scroll -id ${Hier.1} -vertical -set 0
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
@@ -268,7 +271,7 @@ gui_list_set_filter -id ${Member.1} -text {*}
 # Data 'Data.1'
 gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {LowPower 1} {Parameter 1} {All 1} {Aggregate 1} {LibBaseMember 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {BaseMembers 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
 gui_list_set_filter -id ${Data.1} -text {*}
-gui_list_show_data -id ${Data.1} {top.dut.uart_recv.rx_core}
+gui_list_show_data -id ${Data.1} {top.uart_tx_full_test}
 gui_view_scroll -id ${Data.1} -vertical -set 0
 gui_view_scroll -id ${Data.1} -horizontal -set 0
 gui_view_scroll -id ${Hier.1} -vertical -set 0
@@ -278,7 +281,7 @@ gui_view_scroll -id ${Hier.1} -horizontal -set 0
 gui_src_value_annotate -id ${Source.1} -switch false
 gui_set_env TOGGLE::VALUEANNOTATE 0
 gui_open_source -id ${Source.1}  -replace -active top /afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart/verif/uart-tb.sv
-gui_view_scroll -id ${Source.1} -vertical -set 195
+gui_view_scroll -id ${Source.1} -vertical -set 870
 gui_src_set_reusable -id ${Source.1}
 # Warning: Class view not found.
 # Restore toplevel window zorder
@@ -286,7 +289,7 @@ gui_src_set_reusable -id ${Source.1}
 if {[gui_exist_window -window ${TopLevel.1}]} {
 	gui_set_active_window -window ${TopLevel.1}
 	gui_set_active_window -window ${Source.1}
-	gui_set_active_window -window ${Console.1}
+	gui_set_active_window -window ${DLPane.1}
 }
 #</Session>
 

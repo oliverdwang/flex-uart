@@ -26,7 +26,6 @@ module transmitter
   );
 
   logic [7:0] latched_tx_data;
-  logic [3:0] count;
   logic [9:0] shift_out; // to include start and stop bit
   logic latch_data, xfer_to_shift, do_tx, do_shift, last_bit_tx;
 

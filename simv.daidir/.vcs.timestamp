@@ -42,15 +42,15 @@ ftp_proxy=http://proximus.ece.cmu.edu:3128/
 binpath=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/linux64/bin
 XDG_VTNR=2
 XDG_SESSION_TYPE=x11
-XDG_SESSION_ID=460
+XDG_SESSION_ID=599
 XDG_SESSION_DESKTOP=gnome-classic
 XDG_SEAT=seat0
 XDG_RUNTIME_DIR=/run/user/2644831
 XDG_MENU_PREFIX=gnome-
 XDG_DATA_DIRS=/afs/andrew.cmu.edu/usr18/davidx/.local/share/flatpak/exports/share/:/var/lib/flatpak/exports/share/:/usr/local/share/:/usr/share/
 XDG_CURRENT_DESKTOP=GNOME-Classic:GNOME
-XAUTHORITY=/run/gdm/auth-for-davidx-Y3MW0z/database
-WINDOWPATH=1:1:1:1:1:1:1:2
+XAUTHORITY=/run/gdm/auth-for-davidx-Vl3CXh/database
+WINDOWPATH=1:1:1:1:1:1:1:1:1:1:2
 VTE_VERSION=5204
 VOLTUS_TEMPUS_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/ssv-19.12.000/tools.lnx86
 VMR_MODE_FLAG=32
@@ -74,10 +74,10 @@ SYNOPSYS_LICENSE=/afs/ece.cmu.edu/support/synopsys/license.dat
 SYNOPSYS_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release
 SSH_AUTH_SOCK=/run/user/2644831/keyring/ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=12811
+SSH_AGENT_PID=21104
 SPECMAN_OUTPUT_TO_TTY=1
 SIM_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/xcelium-19.03.010/tools.lnx86
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/12790,unix/unix:/tmp/.ICE-unix/12790
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/21083,unix/unix:/tmp/.ICE-unix/21083
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
@@ -111,7 +111,7 @@ GNOME_SHELL_SESSION_MODE=classic
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 GJS_DEBUG_TOPICS=JS ERROR;JS LOG
 GJS_DEBUG_OUTPUT=stderr
-GIO_LAUNCHED_DESKTOP_FILE_PID=25454
+GIO_LAUNCHED_DESKTOP_FILE_PID=21769
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/xfce4-terminal.desktop
 GENUS_DIR=/afs/ece.cmu.edu/support/cds/share/image/usr/cds/genus-18.14.000/tools.lnx86
 GDM_LANG=en_US.UTF-8
@@ -126,7 +126,7 @@ DVE=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve
 DESKTOP_SESSION=gnome-classic
 DC_VERSION=syn-vJ-2014.09-SP4
 DC_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/syn-vJ-2014.09-SP4
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-EAQAiygl5L,guid=56cfb7d6cd3c6189b17134d4623b7a5b
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-BHo6xgW5CN,guid=297a7524b5cc16e9b3e79763623caa55
 CVS_RSH=ssh
 COLORTERM=truecolor
 CMD=/afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/gui/dve/linux64/bin/dve.exe
@@ -143,11 +143,11 @@ AKLOG=/usr/bin/aklog
 1646169426 rtl/uart-top.sv
 1648071139 rtl/uart-receiver.sv
 1646193887 rtl/uart-lib.sv
-1648070542 verif/uart-tb.sv
+1648151283 verif/uart-tb.sv
 1440562444 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/vcsd.tab
 4
 0 
 1440563255 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/libvirsim.so
 1440562843 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/liberrorinf.so
 1440562824 /afs/ece.cmu.edu/support/synopsys/synopsys.release/vcs-mx_vK-2015.09/linux64/lib/libsnpsmalloc.so
-1648071145 simv.daidir
+1648151290 simv.daidir

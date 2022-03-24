@@ -76,14 +76,15 @@ module top();
 
     // uart_rx_framing_reset_test();
 
-    uart_send_random_shit_test();
+    // uart_send_random_shit_test();
 
-    @(posedge clk);
-    end_simulation();
-    // Send packets from the host interface
-    nominal_uart_tx_test();
+    // // Send packets from the host interface
+    // nominal_uart_tx_test();
+
+    uart_tx_full_test();
 
     // Wrap up test after small delay
+    @(posedge clk);
     end_simulation();
   end
 
@@ -621,6 +622,24 @@ module top();
       end
   endtask
 
+  task uart_tx_full_test;
+    logic [7:0] temp1, temp2;
+    for (int i = 0; i < `NUM_TRIALS; i++) begin
+      reset_context();
+      tb_receive_packet();
+      temp1 <= packet.data;
+      tb_receive_packet();
+      temp2 <= packet.data;
+      // buffer should be full now right?
+      assert (!tx_data_ready)
+        else $error("why are you not full???");
+      for (int j = 0; j < 10000; j++) begin
+        @(posedge clk);
+      end
+      assert (tx_data_ready)
+        else $error("you should def not be full anymore");
+    end
+  endtask
 
 
   task nominal_uart_tx_test;
@@ -632,11 +651,12 @@ module top();
       while (tb_rx == 1'b1) begin
         @(posedge clk);
       end
-
       // Check that start bit was transmitted properly
       for (int j = 0; j < `SPEC_BIT_LEN; j++) begin
         assert (tb_rx == 1'b0)
           else $error("Start bit (%i) was not low", tb_rx);
+        @(posedge clk);
+        $display("wtf");
       end
 
       // Check that all data bits were transmitted properly
@@ -644,6 +664,7 @@ module top();
         for (int k = 0; k < `SPEC_BIT_LEN; k++) begin
           assert (tb_rx == packet.data[j])
             else $error("Data bit (%i) was not transmitted properly", tb_rx);
+          @(posedge clk);
         end
       end
 
@@ -651,6 +672,7 @@ module top();
       for (int j = 0; j < `SPEC_BIT_LEN; j++) begin
         assert (tb_rx == 1'b1)
           else $error("Stop bit (%i) was not transmitted properly", tb_rx);
+        @(posedge clk);
       end
     end
   endtask

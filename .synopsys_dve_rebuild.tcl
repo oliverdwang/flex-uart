@@ -1,5 +1,5 @@
 # DVE Simulation Rebuild/Restart Options
-# Saved on Wed Mar 23 17:32:24 2022
+# Saved on Thu Mar 24 15:48:08 2022
 set SIMSETUP::REBUILDOPTION 1
 set SIMSETUP::REBUILDCMD {clear; vcs -debug -sverilog verif/uart-tb.sv rtl/uart-*}
 set SIMSETUP::REBUILDDIR {}

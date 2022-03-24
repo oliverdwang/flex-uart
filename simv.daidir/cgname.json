@@ -4,14 +4,14 @@
         "EVcYB",
         "module"
     ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module"
+    ],
     "std": [
         "std",
         "reYIK",
-        "module"
-    ],
-    "top": [
-        "top",
-        "Emx8S",
         "module"
     ],
     "uart": [
@@ -19,9 +19,9 @@
         "bvImI",
         "module"
     ],
-    "...MASTER...": [
-        "SIM",
-        "amcQw",
+    "top": [
+        "top",
+        "Emx8S",
         "module"
     ]
 }
