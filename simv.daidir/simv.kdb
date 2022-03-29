@@ -1,9 +1,0 @@
-rc file Version 1.0
-
-[Design]
-COMPILE_PATH=/afs/ece.cmu.edu/usr/davidx/Private/18725/flex-uart
-SystemC=FALSE
-UUM=FALSE
-KDB=FALSE
-USE_NOVAS_HOME=FALSE
-TOP=top 

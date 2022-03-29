@@ -78,13 +78,12 @@ module transmitter
     latch_data = 1'b0;
     xfer_to_shift = 1'b0;
     do_tx = 1'b0;
-    if (ns == STAGE) begin
-      latch_data = 1'b1;
-    end
     case(cs)
       IDLE: begin
         tx_data_ready = 1'b1;        
-
+        if (ns == STAGE) begin
+          latch_data = 1'b1;
+        end
       end
       STAGE: begin
         xfer_to_shift = 1'b1;

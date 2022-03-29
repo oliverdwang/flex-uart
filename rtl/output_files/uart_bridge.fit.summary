@@ -1,0 +1,20 @@
+Fitter Status : Successful - Sun Mar 27 18:46:06 2022
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : uart_bridge
+Top-level Entity Name : uart_bridge
+Family : Cyclone V
+Device : 5CEBA4F23C7
+Timing Models : Final
+Logic utilization (in ALMs) : 513 / 18,480 ( 3 % )
+Total registers : 1229
+Total pins : 61 / 224 ( 27 % )
+Total virtual pins : 0
+Total block memory bits : 1,720,320 / 3,153,920 ( 55 % )
+Total RAM Blocks : 210 / 308 ( 68 % )
+Total DSP Blocks : 0 / 66 ( 0 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 1 / 4 ( 25 % )
+Total DLLs : 0 / 4 ( 0 % )
