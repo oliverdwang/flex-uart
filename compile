@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-vcs -sverilog -debug verif/uart-tb.sv rtl/uart-*
+vcs -sverilog -debug verif/uart-tb.sv rtl/uart-*.sv
