@@ -18,6 +18,7 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+`default_nettype none
 
 
 //
@@ -142,6 +143,7 @@ module rptr_empty
 
   logic [ADDRSIZE:0] rbin;
   logic [ADDRSIZE:0] rgraynext, rbinnext;
+  logic [ADDRSIZE:0] rempty_val;
 
   //-------------------
   // GRAYSTYLE2 pointer
@@ -188,6 +190,7 @@ module wptr_full
 
   logic [ADDRSIZE:0] wbin;
   logic [ADDRSIZE:0] wgraynext, wbinnext;
+  logic [ADDRSIZE:0] wfull_val;
 
   // GRAYSTYLE2 pointer
   always_ff @(posedge wclk or negedge wrst_n)

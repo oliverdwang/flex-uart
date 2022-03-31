@@ -29,7 +29,7 @@ module uart
   logic [7:0] rx_data_unbuf, tx_data_unbuf;
   logic       rx_buf_ready, rx_data_unbuf_valid,
               rx_buf_data_invalid, rx_buf_not_ready,
-              tx_buf_not_ready, tx_buf_data_invalid, 
+              tx_buf_not_ready, tx_buf_data_invalid,
               tx_buf_data_valid, tx_data_unbuf_ready;
 
   receiver uart_recv(.clk(uart_clk),
@@ -42,7 +42,7 @@ module uart
                      .framing_err(rx_framing_err),
                      .overrun(rx_overrun));
 
-  
+
 
   transmitter uart_write(.clk(uart_clk),
                          .rst_n(uart_rst_n),
@@ -59,8 +59,8 @@ module uart
                                                   .rrst_n(core_rst_n),
                                                   .wdata(rx_data_unbuf),
                                                   .rdata(rx_data),
-                                                  .wfull(rx_buf_not_ready)),
-                                                  .rempty(rx_buf_data_invalid);
+                                                  .wfull(rx_buf_not_ready),
+                                                  .rempty(rx_buf_data_invalid));
 
   async_fifo #(.DSIZE(8), .ASIZE(3)) uart_tx_fifo(.winc(tx_data_valid),
                                                   .wclk(core_clk),
@@ -76,7 +76,7 @@ module uart
   assign rx_data_valid = ~rx_buf_data_invalid;
   assign rx_buf_ready = ~rx_buf_not_ready;
   assign tx_buf_data_valid = ~tx_buf_data_invalid;
-  
+
 
   assign tx_data_ready = ~tx_buf_not_ready;
 
